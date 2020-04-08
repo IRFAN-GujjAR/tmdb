@@ -5,6 +5,6 @@ to fetch Movies, Tv Shows, Celebrities etc information.
 
 
                         
-                        # IOS
+                                  **IOS**
                         
 <img src="Images/iOS/1.png" width="250">
