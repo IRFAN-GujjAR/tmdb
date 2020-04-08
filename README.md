@@ -1,4 +1,4 @@
-# tmdb
+# TMDb App
 
 A new Flutter application.
 
