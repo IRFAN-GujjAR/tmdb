@@ -4,4 +4,7 @@ TMDb is a cross-platform application developed using flutter framework that uses
 to fetch Movies, Tv Shows, Celebrities etc information.
 
 
-/t<img src="Images/iOS/1.png" width="250">
+                        
+                        # IOS
+                        
+<img src="Images/iOS/1.png" width="250">
