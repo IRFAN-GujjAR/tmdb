@@ -6,5 +6,5 @@ to fetch Movies, Tv Shows, Celebrities etc information.
 
                         
                                   # IOS
-<img src="Images/iOS/1.png" width="215">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/android/1.png" width="232"><img src="Images/iOS/1.png" width="215">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/android/1.png" width="232">
+<img src="Images/iOS/1.png" width="215">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/android/1.png" width="232">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/iOS/1.png" width="215">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/android/1.png" width="232">
 
