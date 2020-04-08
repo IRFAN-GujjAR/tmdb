@@ -16,6 +16,7 @@ to fetch Movies, Tv Shows, Celebrities etc information.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/iOS/7.png" width="200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/android/7.png" width="217">
 
 
+# License
 
 Copyright (c) 2020 IRFAN GujjAR
 
