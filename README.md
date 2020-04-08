@@ -12,4 +12,4 @@ to fetch Movies, Tv Shows, Celebrities etc information.
 
 <img src="Images/iOS/5.png" width="200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/android/5.png" width="217">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/iOS/6.png" width="200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/android/6.png" width="217">
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/iOS/7.png" width="200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/android/7.png" width="217">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/iOS/7.png" width="200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/android/7.png" width="217">
