@@ -1,5 +1,4 @@
 # TMDb App
 
-TMDb app is a flutter app that uses https://www.themoviedb.org to fetch Movies, Tv Shows, Celebrities etc information.
-
-## Getting Started
+TMDb is a cross-platform application developed using flutter framework that uses https://www.themoviedb.org API 
+to fetch Movies, Tv Shows, Celebrities etc information.
