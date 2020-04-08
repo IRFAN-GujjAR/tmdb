@@ -6,4 +6,4 @@ to fetch Movies, Tv Shows, Celebrities etc information.
 
                         
                                   # IOS
-<img src="Images/android/2.png" width="240"><img src="Images/android/2.png" width="240">
+<img src="Images/ios/1.png" width="215"><img src="Images/android/1.png" width="240">
