@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tmdb/network/common.dart';
 import 'package:tmdb/provider/login_info_provider.dart';
 import 'package:tmdb/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -71,7 +70,6 @@ class _LoginState extends State<Login> {
       children: <Widget>[
         Container(
           height: 50,
-          margin: const EdgeInsets.only(left: 20, right: 20),
           decoration: isIOS
               ? BoxDecoration()
               : BoxDecoration(
@@ -173,7 +171,6 @@ class _LoginState extends State<Login> {
       children: <Widget>[
         Container(
           height: 50,
-          margin: const EdgeInsets.only(left: 20, right: 20),
           decoration: isIOS
               ? BoxDecoration()
               : BoxDecoration(
@@ -270,7 +267,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void _continueWithoutSignIn(BuildContext context) async{
+  void _continueWithoutSignIn(BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.setBool(IS_APP_STARTED_FIRST_TIME, false);
     _navigateToMovieTvShowApp();
@@ -357,205 +354,210 @@ class _LoginState extends State<Login> {
   }
 
   Widget body(BuildContext context, double topPadding) {
-    return Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        width: double.maxFinite,
-        height: double.maxFinite,
-        decoration: BoxDecoration(
-            color: Colors.black, border: Border.all(color: Colors.black)),
-        child: SingleChildScrollView(
-          padding: EdgeInsets.only(top: topPadding + 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  padding: const EdgeInsets.only(
-                      top: 5, bottom: 5, right: 15, left: 15),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      color: Colors.grey[900],
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Text(
-                    'TMDb',
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              _buildUsernameWidget,
-              SizedBox(
-                height: 20,
-              ),
-              _buildPasswordWidget,
-              SizedBox(
-                height: 20,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  width: double.maxFinite,
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  child: Builder(
-                    builder: (context) {
-                      return isIOS
-                          ? CupertinoButton(
-                              padding: const EdgeInsets.only(
-                                  top: 15, bottom: 15, left: 40, right: 40),
-                              child: isLoading
-                                  ? CupertinoActivityIndicator()
-                                  : Text(
-                                      'Sign in',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 20),
-                                    ),
-                              color: Colors.green[900],
-                              onPressed: isLoading
-                                  ? null
-                                  : () {
-                                      _signIn(context);
-                                    },
-                            )
-                          : RaisedButton(
-                              onPressed: isLoading
-                                  ? null
-                                  : () {
-                                      _signIn(context);
-                                    },
-                              padding: const EdgeInsets.only(
-                                  top: 15, bottom: 15, left: 40, right: 40),
-                              color: Colors.green[900],
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8))),
-                              child: isLoading
-                                  ? CircularProgressIndicator()
-                                  : Text(
-                                      'Sign in',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 20),
-                                    ),
-                            );
-                    },
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Don't have a account ? ",
+    return GestureDetector(
+      onTap: (){
+        hideKeyBoard(context);
+      },
+      child: Container(
+          margin: EdgeInsets.only(
+              top: MediaQuery.of(context).padding.top, left: 20, right: 20),
+          width: double.maxFinite,
+          height: double.maxFinite,
+          decoration: BoxDecoration(
+              color: Colors.black, border: Border.all(color: Colors.black)),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(top: topPadding + 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                        top: 5, bottom: 5, right: 15, left: 15),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        color: Colors.grey[900],
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: Text(
+                      'TMDb',
                       style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white),
+                          color: Colors.green,
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold),
                     ),
-                    CupertinoButton(
-                      padding: const EdgeInsets.all(0),
-                      onPressed: isLoading ? null : () => _launchURL(),
-                      child: Text(
-                        'Sign up',
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                _buildUsernameWidget,
+                SizedBox(
+                  height: 20,
+                ),
+                _buildPasswordWidget,
+                SizedBox(
+                  height: 20,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: double.maxFinite,
+                    child: Builder(
+                      builder: (context) {
+                        return isIOS
+                            ? CupertinoButton(
+                                padding: const EdgeInsets.only(
+                                    top: 15, bottom: 15, left: 40, right: 40),
+                                child: isLoading
+                                    ? CupertinoActivityIndicator()
+                                    : Text(
+                                        'Sign in',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 20),
+                                      ),
+                                color: Colors.green[900],
+                                onPressed: isLoading
+                                    ? null
+                                    : () {
+                                        _signIn(context);
+                                      },
+                              )
+                            : RaisedButton(
+                                onPressed: isLoading
+                                    ? null
+                                    : () {
+                                        _signIn(context);
+                                      },
+                                padding: const EdgeInsets.only(
+                                    top: 15, bottom: 15, left: 40, right: 40),
+                                color: Colors.green[900],
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8))),
+                                child: isLoading
+                                    ? CircularProgressIndicator()
+                                    : Text(
+                                        'Sign in',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 20),
+                                      ),
+                              );
+                      },
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Don't have a account ? ",
                         style: TextStyle(
                             fontSize: 15,
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
                       ),
-                    )
-                  ],
+                      CupertinoButton(
+                        padding: const EdgeInsets.all(0),
+                        onPressed: isLoading ? null : () => _launchURL(),
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              widget.navigationCategory == NavigationCategory.Forward
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              margin:
-                                  const EdgeInsets.only(left: 20, right: 10),
-                              height: 1,
-                              color: Colors.grey[900],
+                widget.navigationCategory == NavigationCategory.Forward
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only( right: 10),
+                                height: 1,
+                                color: Colors.grey[900],
+                              ),
                             ),
-                          ),
-                          Text('OR'),
-                          Expanded(
-                            child: Container(
-                              margin:
-                                  const EdgeInsets.only(left: 10, right: 20),
-                              height: 1,
-                              color: Colors.grey[900],
+                            Text('OR'),
+                            Expanded(
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(left: 10),
+                                height: 1,
+                                color: Colors.grey[900],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(),
-              widget.navigationCategory == NavigationCategory.Forward
-                  ? Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Builder(builder: (context) {
-                            return isIOS
-                                ? CupertinoButton(
-                                    child: Text(
-                                      'Continue without signing in',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    color: Colors.green[900],
-                                    onPressed: isLoading
-                                        ? null
-                                        : () {
-                                            _continueWithoutSignIn(context);
-                                          },
-                                  )
-                                : RaisedButton(
-                                    padding: const EdgeInsets.only(
-                                        top: 15,
-                                        bottom: 15,
-                                        left: 40,
-                                        right: 40),
-                                    color: Colors.green[900],
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8))),
-                                    child: Text(
-                                      'Continue without signing in',
-                                      style: TextStyle(
+                          ],
+                        ),
+                      )
+                    : Container(),
+                widget.navigationCategory == NavigationCategory.Forward
+                    ? Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Builder(builder: (context) {
+                              return isIOS
+                                  ? CupertinoButton(
+                                      child: Text(
+                                        'Continue without signing in',
+                                        style: TextStyle(
+                                          color: Colors.white,
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Colors.white),
-                                    ),
-                                    onPressed: isLoading
-                                        ? null
-                                        : () {
-                                            _continueWithoutSignIn(context);
-                                          },
-                                  );
-                          })),
-                    )
-                  : Container()
-            ],
-          ),
-        ));
+                                        ),
+                                      ),
+                                      color: Colors.green[900],
+                                      onPressed: isLoading
+                                          ? null
+                                          : () {
+                                              _continueWithoutSignIn(context);
+                                            },
+                                    )
+                                  : RaisedButton(
+                                      padding: const EdgeInsets.only(
+                                          top: 15,
+                                          bottom: 15,
+                                          left: 40,
+                                          right: 40),
+                                      color: Colors.green[900],
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8))),
+                                      child: Text(
+                                        'Continue without signing in',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: Colors.white),
+                                      ),
+                                      onPressed: isLoading
+                                          ? null
+                                          : () {
+                                              _continueWithoutSignIn(context);
+                                            },
+                                    );
+                            })),
+                      )
+                    : Container()
+              ],
+            ),
+          )),
+    );
   }
 
   LoginInfoProvider _loginInfoProvider;

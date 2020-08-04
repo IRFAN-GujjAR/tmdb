@@ -372,8 +372,7 @@ class _TMDbState extends State<TMDb> {
   }
 
   void _navigateToLogin() {
-    Navigator.push(
-        context,
+    Navigator.of(context,rootNavigator: true).push(
         isIOS
             ? CupertinoPageRoute(
                 builder: (context) => Login(

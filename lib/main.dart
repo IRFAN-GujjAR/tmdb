@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' as foundation;
@@ -5,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:tmdb/provider/login_info_provider.dart';
 import 'launcher.dart';
 
-bool get isIOS => foundation.defaultTargetPlatform == TargetPlatform.iOS;
+bool get isIOS => Platform.isIOS;
 
 void main() => runApp(MyApp());
 
