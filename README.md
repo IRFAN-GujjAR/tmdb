@@ -3,7 +3,7 @@
 TMDb is a cross-platform application developed using flutter framework that uses https://www.themoviedb.org API 
 to fetch Movies, Tv Shows, Celebrities etc information.
 
-**Google play store link : https://play.google.com/store/apps/details?id=com.irfangujjar.tmdb
+**Google play store link** : https://play.google.com/store/apps/details?id=com.irfangujjar.tmdb
 
 **Video Link for the app** : https://www.youtube.com/watch?v=EtTBT_nbW_A
   
