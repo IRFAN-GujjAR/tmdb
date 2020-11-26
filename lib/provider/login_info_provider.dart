@@ -1,25 +1,27 @@
 import 'package:flutter/foundation.dart';
+import 'package:tmdb/models/user_info_model.dart';
+import 'package:tmdb/utils/shared_pref/shared_pref_utils.dart';
 
 class LoginInfoProvider extends ChangeNotifier {
-  String sessionId = '';
-  String accountId = '';
-  String username = '';
+  UserInfoModel _userInfo;
+  UserInfoModel get user => _userInfo;
 
-  void signIn(String sessionId, String accountId, String username) {
-    this.sessionId = sessionId;
-    this.accountId = accountId;
-    this.username = username;
+  String get sessionId => isSignedIn ? _userInfo.sessionId : '';
+  int get accountId => isSignedIn ? _userInfo.userId : 0;
+  String get username => isSignedIn ? _userInfo.userName : '';
+
+  LoginInfoProvider({@required UserInfoModel userInfo}) : _userInfo = userInfo;
+
+  void signIn(UserInfoModel userInfo) {
+    _userInfo = userInfo;
     notifyListeners();
   }
 
-  void signOut(){
-    sessionId='';
-    accountId='';
-    username='';
+  Future<void> signOut() async {
+    await SharedPrefUtils.deleteLoginDetails();
+    _userInfo = null;
     notifyListeners();
   }
 
-  bool get isSignedIn {
-    return sessionId.isNotEmpty ? true : false;
-  }
+  bool get isSignedIn => _userInfo != null;
 }

@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../main.dart';
-
 
 //Enter TMDb(https://www.themoviedb.org) Api Key
-const String Api_Key = ;
+const String Api_Key = '09925a06401a0368732a89cdcb78bc4a';
 
 const String SESSION_ID = 'sessionId';
 const String USER_ID = 'userId';
@@ -15,6 +11,9 @@ const String IS_APP_STARTED_FIRST_TIME = 'app_started_first_time';
 
 const String IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
 const int TIME_OUT_DURATION = 15;
+
+enum MediaType { Movie, TvShow }
+const MEDIA_TYPE_VALUE = {MediaType.Movie: 'movie', MediaType.TvShow: 'tv'};
 
 class BackDropSizes {
   static const String w300 = 'w300';
@@ -136,79 +135,10 @@ String getTvShowsGenres(List<int> genres) {
   return genreString == null ? '' : genreString;
 }
 
-String getSessionIdFromPreferences(SharedPreferences sharedPreferences) {
-  return sharedPreferences.getString(SESSION_ID);
-}
-
-String getUserIdFromPreferences(SharedPreferences sharedPreferences) {
-  return sharedPreferences.getString(USER_ID);
-}
-
-String getUsernameFromPreferences(SharedPreferences sharedPreferences) {
-  return sharedPreferences.getString(USER_NAME);
-}
-
-void showInternetConnectionFailureError(BuildContext context) {
-  if (isIOS) {
-    showCupertinoDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CupertinoAlertDialog(
-            content: Text(
-              'Check your internet connection!',
-              style: TextStyle(fontSize: 16),
-            ),
-            actions: <Widget>[
-              CupertinoButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Ok'),
-              )
-            ],
-          );
-        });
-  } else {
-    Scaffold.of(context).showSnackBar(SnackBar(
-      backgroundColor: Colors.grey[900],
-      duration: const Duration(seconds: 1),
-      content: Text(
-        'Check your internet connection!',
-        style: TextStyle(color: Colors.white),
-      ),
-    ));
-  }
-}
-
-void showUserIsNotLoggedIn(BuildContext context){
-  if (isIOS) {
-    showCupertinoDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CupertinoAlertDialog(
-            content: Text(
-              'You are not signed in. Please Sign into TMDb account !',
-              style: TextStyle(fontSize: 16),
-            ),
-            actions: <Widget>[
-              CupertinoButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Ok'),
-              )
-            ],
-          );
-        });
-  } else {
-    Scaffold.of(context).showSnackBar(SnackBar(
-      backgroundColor: Colors.grey[900],
-      duration: const Duration(seconds: 3),
-      content: Text(
-        'You are not signed in. Please Sign into TMDb account !',
-        style: TextStyle(color: Colors.white),
-      ),
-    ));
+void hideKeyBoard(BuildContext context) {
+  FocusScopeNode currentFocus = FocusScope.of(context);
+  if (!currentFocus.hasPrimaryFocus) {
+    currentFocus.unfocus();
   }
 }
 
@@ -218,7 +148,6 @@ String getThumbnail({
     'https://i.ytimg.com/vi/$videoId/${ThumbnailQuality.medium}';
 
 class ThumbnailQuality {
-
   /// 120*90
   static const String defaultQuality = 'default.jpg';
 
