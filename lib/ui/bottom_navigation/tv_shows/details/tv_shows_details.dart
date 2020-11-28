@@ -1244,7 +1244,7 @@ class _TvShowDetailsState extends State<TvShowDetails> {
         .add(NotifyTvShowMediaStateChanges(tvId: widget.id));
   }
 
-  List<Widget> get _buildMenuItems {
+  List<Widget> _buildMenuItems(MediaStateState mediaState) {
     final loginInfoProvider = Provider.of<LoginInfoProvider>(context);
 
     return <Widget>[
@@ -1263,133 +1263,139 @@ class _TvShowDetailsState extends State<TvShowDetails> {
                 context, favouriteMediaState.error.toString());
           }
         }, builder: (context, favouriteMediaState) {
-          return BlocBuilder<MediaStateBloc, MediaStateState>(
-              cubit: _mediaStateBloc,
-              builder: (context, mediaState) {
-                final isEnable = (!(mediaState is MediaStateLoading) &&
-                        !(favouriteMediaState is FavouriteMediaLoading)) ||
-                    (!loginInfoProvider.isSignedIn);
-                final showFavouriteFilledIcon = loginInfoProvider.isSignedIn &&
-                    mediaState is MediaStateLoaded &&
-                    mediaState.mediaState.favorite;
+          final isEnable = ((mediaState is MediaStateLoaded) &&
+                  !(favouriteMediaState is FavouriteMediaLoading)) ||
+              (!loginInfoProvider.isSignedIn);
+          final showFavouriteFilledIcon = loginInfoProvider.isSignedIn &&
+              mediaState is MediaStateLoaded &&
+              mediaState.mediaState.favorite;
 
-                return isIOS
-                    ? CupertinoButton(
-                        padding: const EdgeInsets.all(0),
-                        child: Icon(showFavouriteFilledIcon
-                            ? Icons.favorite
-                            : Icons.favorite_border),
-                        onPressed: isEnable
-                            ? () {
-                                onFavouriteClick(
-                                    context, loginInfoProvider, mediaState);
-                              }
-                            : null,
-                      )
-                    : IconButton(
-                        padding: const EdgeInsets.all(0),
-                        icon: Icon(showFavouriteFilledIcon
-                            ? Icons.favorite
-                            : Icons.favorite_border),
-                        color: Colors.blue,
-                        onPressed: isEnable
-                            ? () {
-                                onFavouriteClick(
-                                    context, loginInfoProvider, mediaState);
-                              }
-                            : null,
-                      );
-              });
+          return isIOS
+              ? CupertinoButton(
+                  padding: const EdgeInsets.all(0),
+                  child: Icon(showFavouriteFilledIcon
+                      ? Icons.favorite
+                      : Icons.favorite_border),
+                  onPressed: isEnable
+                      ? () {
+                          onFavouriteClick(
+                              context, loginInfoProvider, mediaState);
+                        }
+                      : null,
+                )
+              : IconButton(
+                  padding: const EdgeInsets.all(0),
+                  icon: Icon(showFavouriteFilledIcon
+                      ? Icons.favorite
+                      : Icons.favorite_border),
+                  color: Colors.blue,
+                  onPressed: isEnable
+                      ? () {
+                          onFavouriteClick(
+                              context, loginInfoProvider, mediaState);
+                        }
+                      : null,
+                );
         }),
       ),
-      BlocBuilder<MediaStateBloc, MediaStateState>(
-          cubit: _mediaStateBloc,
-          builder: (context, mediaState) {
-            final showStarFilledIcon = loginInfoProvider.isSignedIn &&
-                mediaState is MediaStateLoaded &&
-                mediaState.mediaState.rated;
-            final isEnable = !(mediaState is MediaStateLoading) ||
-                !loginInfoProvider.isSignedIn;
-            return isIOS
-                ? CupertinoButton(
-                    padding: const EdgeInsets.all(0),
-                    child: Icon(
-                        showStarFilledIcon ? Icons.star : Icons.star_border),
-                    onPressed: isEnable
-                        ? () {
-                            _onRateClick(loginInfoProvider);
-                          }
-                        : null,
-                  )
-                : IconButton(
-                    padding: const EdgeInsets.all(0),
-                    icon: Icon(
-                        showStarFilledIcon ? Icons.star : Icons.star_border),
-                    color: Colors.blue,
-                    onPressed: isEnable
-                        ? () {
-                            _onRateClick(loginInfoProvider);
-                          }
-                        : null,
-                  );
-          }),
+      Builder(builder: (context) {
+        final showStarFilledIcon = loginInfoProvider.isSignedIn &&
+            mediaState is MediaStateLoaded &&
+            mediaState.mediaState.rated;
+        final isEnable =
+            (mediaState is MediaStateLoaded) || !loginInfoProvider.isSignedIn;
+        return isIOS
+            ? CupertinoButton(
+                padding: const EdgeInsets.all(0),
+                child:
+                    Icon(showStarFilledIcon ? Icons.star : Icons.star_border),
+                onPressed: isEnable
+                    ? () {
+                        _onRateClick(loginInfoProvider);
+                      }
+                    : null,
+              )
+            : IconButton(
+                padding: const EdgeInsets.all(0),
+                icon: Icon(showStarFilledIcon ? Icons.star : Icons.star_border),
+                color: Colors.blue,
+                onPressed: isEnable
+                    ? () {
+                        _onRateClick(loginInfoProvider);
+                      }
+                    : null,
+              );
+      }),
       BlocProvider<WatchListMediaBloc>(
         create: (_) => WatchListMediaBloc(
             watchListMediaRepo: WatchListMediaRepo(
                 client: getHttpClient(context), mediaType: MediaType.TvShow)),
         child: BlocConsumer<WatchListMediaBloc, WatchListMediaState>(
-            listener: (context, watchListMediaState) {
-              if (watchListMediaState is WatchListMediaAdded) {
-                _notifyTvShowStateChanges;
-              } else if (watchListMediaState is WatchListMediaRemoved) {
-                _notifyTvShowStateChanges;
-              } else if (watchListMediaState is WatchListMediaError) {
-                DialogUtils.showMessageDialog(
-                    context, watchListMediaState.error.toString());
-              }
-            },
-            builder: (context, watchListMediaState) =>
-                BlocBuilder<MediaStateBloc, MediaStateState>(
-                  cubit: _mediaStateBloc,
-                  builder: (context, mediaState) {
-                    final isEnable = (!(mediaState is MediaStateLoading) &&
-                            !(watchListMediaState is WatchListMediaLoading)) ||
-                        (!loginInfoProvider.isSignedIn);
-                    final showbookMarkFilledIcon =
-                        loginInfoProvider.isSignedIn &&
-                            mediaState is MediaStateLoaded &&
-                            mediaState.mediaState.watchlist;
+          listener: (context, watchListMediaState) {
+            if (watchListMediaState is WatchListMediaAdded) {
+              _notifyTvShowStateChanges;
+            } else if (watchListMediaState is WatchListMediaRemoved) {
+              _notifyTvShowStateChanges;
+            } else if (watchListMediaState is WatchListMediaError) {
+              DialogUtils.showMessageDialog(
+                  context, watchListMediaState.error.toString());
+            }
+          },
+          builder: (context, watchListMediaState) {
+            final isEnable = ((mediaState is MediaStateLoaded) &&
+                    !(watchListMediaState is WatchListMediaLoading)) ||
+                (!loginInfoProvider.isSignedIn);
+            final showbookMarkFilledIcon = loginInfoProvider.isSignedIn &&
+                mediaState is MediaStateLoaded &&
+                mediaState.mediaState.watchlist;
 
-                    return isIOS
-                        ? CupertinoButton(
-                            padding: const EdgeInsets.all(0),
-                            child: Icon(showbookMarkFilledIcon
-                                ? Icons.bookmark
-                                : Icons.bookmark_border),
-                            onPressed: isEnable
-                                ? () {
-                                    _onBookMarkClick(
-                                        context, loginInfoProvider, mediaState);
-                                  }
-                                : null,
-                          )
-                        : IconButton(
-                            padding: const EdgeInsets.all(0),
-                            icon: Icon(showbookMarkFilledIcon
-                                ? Icons.bookmark
-                                : Icons.bookmark_border),
-                            color: Colors.blue,
-                            onPressed: isEnable
-                                ? () {
-                                    _onBookMarkClick(
-                                        context, loginInfoProvider, mediaState);
-                                  }
-                                : null,
-                          );
-                  },
-                )),
+            return isIOS
+                ? CupertinoButton(
+                    padding: const EdgeInsets.all(0),
+                    child: Icon(showbookMarkFilledIcon
+                        ? Icons.bookmark
+                        : Icons.bookmark_border),
+                    onPressed: isEnable
+                        ? () {
+                            _onBookMarkClick(
+                                context, loginInfoProvider, mediaState);
+                          }
+                        : null,
+                  )
+                : IconButton(
+                    padding: const EdgeInsets.all(0),
+                    icon: Icon(showbookMarkFilledIcon
+                        ? Icons.bookmark
+                        : Icons.bookmark_border),
+                    color: Colors.blue,
+                    onPressed: isEnable
+                        ? () {
+                            _onBookMarkClick(
+                                context, loginInfoProvider, mediaState);
+                          }
+                        : null,
+                  );
+          },
+        ),
       ),
     ];
+  }
+
+  Widget get _buildMediaStateErrorWidget {
+    return isIOS
+        ? CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            child: Icon(Icons.error, color: Colors.red),
+            onPressed: _checkTvShowState)
+        : IconButton(
+            padding: const EdgeInsets.all(0),
+            icon: Icon(
+              Icons.error,
+              color: Colors.red,
+            ),
+            color: Colors.blue,
+            onPressed: _checkTvShowState,
+          );
   }
 
   @override
@@ -1412,23 +1418,36 @@ class _TvShowDetailsState extends State<TvShowDetails> {
                     trailing: BlocBuilder<MediaStateBloc, MediaStateState>(
                       cubit: _mediaStateBloc,
                       builder: (context, mediaState) {
-                        return Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: tvShowDetailsState is TvShowDetailsLoaded
-                              ? _buildMenuItems
-                              : <Widget>[],
-                        );
+                        return (mediaState is MediaStateError)
+                            ? Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [_buildMediaStateErrorWidget],
+                              )
+                            : Row(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children:
+                                    tvShowDetailsState is TvShowDetailsLoaded
+                                        ? _buildMenuItems(mediaState)
+                                        : <Widget>[],
+                              );
                       },
                     )),
                 child: _buildTvShowDetailsWidget(tvShowDetailsState))
             : Scaffold(
-                appBar: AppBar(
-                  title: Text(widget.tvShowTitle),
-                  actions: tvShowDetailsState is TvShowDetailsLoaded
-                      ? _buildMenuItems
-                      : <Widget>[],
+                appBar: PreferredSize(
+                  child: BlocBuilder<MediaStateBloc, MediaStateState>(
+                    cubit: _mediaStateBloc,
+                    builder: (context, mediaState) => AppBar(
+                        title: Text(widget.tvShowTitle),
+                        actions: tvShowDetailsState is TvShowDetailsLoaded
+                            ? mediaState is MediaStateError
+                                ? <Widget>[_buildMediaStateErrorWidget]
+                                : _buildMenuItems(mediaState)
+                            : <Widget>[]),
+                  ),
+                  preferredSize: Size.fromHeight(kToolbarHeight),
                 ),
                 body: _buildTvShowDetailsWidget(tvShowDetailsState));
       },

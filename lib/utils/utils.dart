@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //Enter TMDb(https://www.themoviedb.org) Api Key
-const String Api_Key = '09925a06401a0368732a89cdcb78bc4a';
+const String Api_Key = ;
 
 const String SESSION_ID = 'sessionId';
 const String USER_ID = 'userId';

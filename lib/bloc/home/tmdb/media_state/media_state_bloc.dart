@@ -24,7 +24,7 @@ class MediaStateBloc extends Bloc<MediaStateEvent, MediaStateState> {
       final mediaState = await _mediaStateRepo.checkMediaStates(event.url);
       yield MediaStateLoaded(mediaState: mediaState);
     } catch (error) {
-      yield MediaStatError(error: error);
+      yield MediaStateError(error: error);
     }
   }
 }

@@ -13,8 +13,8 @@ class MediaStateLoaded extends MediaStateState {
   const MediaStateLoaded({@required this.mediaState});
 }
 
-class MediaStatError extends MediaStateState {
+class MediaStateError extends MediaStateState {
   final dynamic error;
 
-  const MediaStatError({@required this.error});
+  const MediaStateError({@required this.error});
 }
