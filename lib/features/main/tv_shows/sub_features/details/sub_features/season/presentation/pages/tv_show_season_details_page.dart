@@ -116,7 +116,7 @@ class TvShowSeasonDetailsPage extends StatelessWidget {
                                       ? Expanded(
                                         flex: 1,
                                         child: Text(
-                                          _formatDate(episode.airDate!),
+                                          episode.airDate!,
                                           style: TextStyle(
                                             fontSize: 12,
                                             color: Colors.grey[300],
@@ -246,15 +246,6 @@ class TvShowSeasonDetailsPage extends StatelessWidget {
     );
   }
 
-  String _formatDate(String date) {
-    return date;
-    // return _formatDate(date);
-    final splitDate = date.split(' ');
-    //Use only 3 letters of month e.g June as Jun
-    splitDate[1] = splitDate[1].substring(0, 3);
-    return splitDate.join('-');
-  }
-
   Widget get _buildSeasonDetailsWidget {
     return BlocBuilder<TvShowSeasonDetailsBloc, TvShowSeasonDetailsState>(
       builder: (context, state) {
@@ -332,7 +323,7 @@ class TvShowSeasonDetailsPage extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 4, left: 5),
                                 child: Text(
-                                  _formatDate(seasonDetails.airDate),
+                                  seasonDetails.airDate,
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.grey,

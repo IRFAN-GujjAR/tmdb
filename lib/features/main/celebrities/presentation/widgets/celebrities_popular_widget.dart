@@ -117,10 +117,6 @@ class CelebritiesPopularWidget extends StatelessWidget {
     );
   }
 
-  Widget get _marginSpacer {
-    return SizedBox(height: 8);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(

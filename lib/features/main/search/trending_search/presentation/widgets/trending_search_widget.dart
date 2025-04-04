@@ -108,7 +108,6 @@ class TrendingSearchWidget extends StatelessWidget {
               context,
               trendingSearches: state.trendingSearch.searches,
             );
-            break;
           case TrendingSearchStateErrorWithoutCache():
             return CustomErrorWidget(
               error: state.error,

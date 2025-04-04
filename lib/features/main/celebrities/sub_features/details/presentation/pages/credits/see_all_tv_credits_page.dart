@@ -28,8 +28,7 @@ class _SeeAllTvCreditsPageState extends State<SeeAllTvCreditsPage>
   void initState() {
     int length = 0;
 
-    if (widget.tvCredits!.cast.isNotEmpty &&
-        widget.tvCredits!.crew.isNotEmpty) {
+    if (widget.tvCredits.cast.isNotEmpty && widget.tvCredits.crew.isNotEmpty) {
       length = 2;
     } else {
       length = 1;
