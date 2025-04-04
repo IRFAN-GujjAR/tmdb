@@ -1,0 +1,1 @@
+enum SortByCFCategory { asc, desc }

@@ -1,21 +1,40 @@
-buildscript {
-    ext.kotlin_version = '1.4.20'
-    ext.multidex_version = "2.0.1"
-    repositories {
-        google()
-        jcenter()
-    }
+// buildscript {
+//     ext.kotlin_version = '1.8.22'
+//     ext.multidex_version = "2.0.1"
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
+//     dependencies {
+//         classpath 'com.android.tools.build:gradle:8.0.2'
+//         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//         classpath 'com.google.gms:google-services:4.3.15'
+//     }
+// }
 
+// allprojects {
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
+// }
+
+// rootProject.buildDir = '../build'
+// subprojects {
+//     project.buildDir = "${rootProject.buildDir}/${project.name}"
+// }
+// subprojects {
+//     project.evaluationDependsOn(':app')
+// }
+
+// tasks.register("clean", Delete) {
+//     delete rootProject.buildDir
+// }
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -27,6 +46,6 @@ subprojects {
     project.evaluationDependsOn(':app')
 }
 
-task clean(type: Delete) {
+tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }

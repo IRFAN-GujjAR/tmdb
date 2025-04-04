@@ -1,0 +1,1 @@
+enum TMDbMediaStateTypeCFCategory { movie, tv }

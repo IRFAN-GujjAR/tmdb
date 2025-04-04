@@ -1,0 +1,1 @@
+enum CelebsListCFCategory { popular, trending }

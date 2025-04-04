@@ -1,1 +1,0 @@
-enum LoginStateEvents { Login, Logout }
