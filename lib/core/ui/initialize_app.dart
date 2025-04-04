@@ -40,7 +40,6 @@ AppDatabase get appDatabase => locator.get<AppDatabase>();
 Future<void> get initializeFlutterApp async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initializeFirebaseApp;
-  if (kDebugMode) await _setupFunctionsEmulator;
   if (!isIOS) await MobileAds.instance.initialize();
   locator.registerSingleton(AppDatabase());
   runApp(await _initializeServicesApp);
@@ -59,6 +58,7 @@ Future<void> get _initializeFirebaseApp async {
       minimumFetchInterval: Duration(hours: 1),
     ),
   );
+  if (kDebugMode) await _setupFunctionsEmulator;
   CloudFunctionsUtl().initializeSingletons;
 }
 

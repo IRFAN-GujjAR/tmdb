@@ -50,7 +50,7 @@ final class SeeAllMoviesProvider extends ChangeNotifier {
   String get errorMsg => _errorMsg;
 
   void get _onLoad {
-    if (!_isLoading) {
+    if (!_isLoading && moviesList.pageNo < moviesList.totalPages) {
       final cfParams = _cfParams;
       cfParams[CFJsonKeys.PARAMS_DATA][CFJsonKeys.PAGE_NO] =
           moviesList.pageNo + 1;

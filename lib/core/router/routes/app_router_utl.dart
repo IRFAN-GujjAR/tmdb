@@ -62,6 +62,7 @@ import 'package:tmdb/features/main/search/trending_search/data/data_sources/tren
 import 'package:tmdb/features/main/search/trending_search/data/db/dao/trending_search_dao.dart';
 import 'package:tmdb/features/main/search/trending_search/domain/use_cases/trending_search_use_case_watch.dart';
 import 'package:tmdb/features/main/tmdb/sub_features/appearances/presentation/pages/appearances_page.dart';
+import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/providers/tmdb_media_list_provider.dart';
 import 'package:tmdb/features/main/tv_shows/data/data_sources/tv_shows_local_data_source.dart';
 import 'package:tmdb/features/main/tv_shows/data/db/dao/tv_shows_dao.dart';
 import 'package:tmdb/features/main/tv_shows/domain/use_cases/tv_shows_use_case_watch.dart';

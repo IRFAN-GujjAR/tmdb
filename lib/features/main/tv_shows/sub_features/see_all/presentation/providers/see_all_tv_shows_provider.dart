@@ -50,7 +50,7 @@ final class SeeAllTvShowsProvider extends ChangeNotifier {
   String get errorMsg => _errorMsg;
 
   void get _onLoad {
-    if (!_isLoading) {
+    if (!_isLoading && tvShowsList.pageNo < tvShowsList.totalPages) {
       final cfParams = _cfParams;
       cfParams[CFJsonKeys.PARAMS_DATA][CFJsonKeys.PAGE_NO] =
           tvShowsList.pageNo + 1;

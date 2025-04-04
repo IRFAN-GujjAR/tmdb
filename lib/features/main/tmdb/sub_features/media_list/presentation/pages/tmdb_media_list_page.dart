@@ -8,6 +8,7 @@ import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/blo
 import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/blocs/tmdb_media_list_event.dart';
 import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/blocs/tmdb_media_list_state.dart';
 import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/providers/tmdb_media_list_scroll_controller_provider.dart';
+import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/widgets/tmdb_media_list_menu_action_button_widget.dart';
 import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/widgets/tmdb_media_list_movies_widget.dart';
 import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/widgets/tmdb_media_list_tv_shows_widget.dart';
 
@@ -84,7 +85,13 @@ class TMDbMediaListPage extends StatelessWidget {
         break;
     }
     return Scaffold(
-      appBar: AppBar(title: Text(_listCategory.title)),
+      appBar: AppBar(
+        title: Text(_listCategory.title),
+        actions:
+            state is TMDbMediaListStateLoaded
+                ? <Widget>[const TMDbMediaListMenuActionButtonWidget()]
+                : <Widget>[],
+      ),
       body: body,
     );
   }
@@ -117,6 +124,7 @@ class TMDbMediaListPage extends StatelessWidget {
                         bottom: TabBar(
                           tabs: [Tab(text: 'Movies'), Tab(text: 'Tv Shows')],
                         ),
+                        actions: [const TMDbMediaListMenuActionButtonWidget()],
                       ),
                     ];
                   },

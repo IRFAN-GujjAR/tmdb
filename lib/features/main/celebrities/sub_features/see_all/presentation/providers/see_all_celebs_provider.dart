@@ -44,7 +44,7 @@ final class SeeAllCelebsProvider extends ChangeNotifier {
   String get errorMsg => _errorMsg;
 
   void get _onLoad {
-    if (!_isLoading) {
+    if (!_isLoading && celebsList.pageNo < celebsList.totalPages) {
       final cfParams = _cfParams;
       cfParams[CFJsonKeys.PARAMS_DATA][CFJsonKeys.PAGE_NO] =
           celebsList.pageNo + 1;

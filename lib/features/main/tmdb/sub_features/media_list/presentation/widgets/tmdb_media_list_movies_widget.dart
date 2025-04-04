@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb/features/ads_manager/presentation/blocs/ads_manager_bloc.dart';
 import 'package:tmdb/features/main/tmdb/sub_features/media_list/domain/entities/tmdb_media_list_entity.dart';
+import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/providers/tmdb_media_list_provider.dart';
 import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/providers/tmdb_media_list_scroll_controller_provider.dart';
 
-import '../../../../../../../core/firebase/cloud_functions/categories/sort_by_cf_category.dart';
 import '../../../../../../../core/firebase/cloud_functions/categories/tmdb/tmdb_cf_category.dart';
 import '../../../../../../../core/firebase/cloud_functions/categories/tmdb/tmdb_media_list_cf_category.dart';
-import '../../../../../../../core/firebase/cloud_functions/categories/tmdb/tmdb_media_list_type_cf_category.dart';
 import '../../../../../../../core/firebase/cloud_functions/cloud_functions_utl.dart';
 import '../../../../../../app_startup/sub_features/user_session/presentation/providers/user_session_provider.dart';
 import '../../../../../movies/sub_features/see_all/data/data_sources/see_all_movies_data_source.dart';
@@ -18,7 +17,6 @@ import '../../../../../movies/sub_features/see_all/presentation/pages/extra/see_
 import '../../../../../movies/sub_features/see_all/presentation/providers/see_all_movies_provider.dart';
 import '../../../../../movies/sub_features/see_all/presentation/widgets/see_all_movies_widget.dart';
 import '../../data/function_params/tmdb_media_list_cf_params.dart';
-import '../../data/function_params/tmdb_media_list_cf_params_data.dart';
 
 class TMDbMediaListMoviesWidget extends StatefulWidget {
   final TMDbMediaListCFCategory listCFCategory;
@@ -58,14 +56,11 @@ class _TMDbMediaListMoviesWidgetState extends State<TMDbMediaListMoviesWidget>
               cfParams:
                   TMDbMediaListCfParams(
                     category: TMDbCFCategory.mediaList,
-                    data: TMDbMediaListCfParamsData(
-                      listCategory: widget.listCFCategory,
-                      listType: TMDbMediaListTypeCFCategory.movie,
-                      userId: user.userId,
-                      sessionId: user.sessionId,
-                      pageNo: 1,
-                      sortBy: SortByCFCategory.asc,
-                    ),
+                    data:
+                        context
+                            .read<TMDbMediaListProvider>()
+                            .paramsData
+                            .movieList,
                   ).toJson(),
             ),
             scrollControllerUtl:

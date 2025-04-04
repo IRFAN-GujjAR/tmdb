@@ -31,4 +31,37 @@ final class TMDbMediaListCfParamsData {
   });
 
   Map<String, dynamic> toJson() => _$TMDbMediaListCfParamsDataToJson(this);
+
+  TMDbMediaListCfParamsData updateSortBy(SortByCFCategory sortBy) {
+    return TMDbMediaListCfParamsData(
+      listCategory: listCategory,
+      listType: listType,
+      userId: userId,
+      sessionId: sessionId,
+      pageNo: pageNo,
+      sortBy: sortBy,
+    );
+  }
+
+  TMDbMediaListCfParamsData get movieList {
+    return TMDbMediaListCfParamsData(
+      listCategory: listCategory,
+      listType: TMDbMediaListTypeCFCategory.movie,
+      userId: userId,
+      sessionId: sessionId,
+      pageNo: pageNo,
+      sortBy: sortBy,
+    );
+  }
+
+  TMDbMediaListCfParamsData get tvShowsList {
+    return TMDbMediaListCfParamsData(
+      listCategory: listCategory,
+      listType: TMDbMediaListTypeCFCategory.tv,
+      userId: userId,
+      sessionId: sessionId,
+      pageNo: pageNo,
+      sortBy: sortBy,
+    );
+  }
 }

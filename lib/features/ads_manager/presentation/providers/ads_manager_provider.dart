@@ -76,12 +76,14 @@ final class AdsManagerProvider extends ChangeNotifier {
 
   void handleBlocState(AdsManagerBloc bloc, AdsManagerState state) {
     if (Platform.isAndroid) {
-      if (state.adsManager.functionCallCount > functionCallAd!.callWaitCount) {
-        if (_admobIds != null && !_isAdLoading && !_isAdShowing) {
-          _isAdLoading = true;
-          _loadInterstitialAd(bloc, functionCallAd!.id);
+      if (functionCallAd != null)
+        if (state.adsManager.functionCallCount >
+            functionCallAd!.callWaitCount) {
+          if (_admobIds != null && !_isAdLoading && !_isAdShowing) {
+            _isAdLoading = true;
+            _loadInterstitialAd(bloc, functionCallAd!.id);
+          }
         }
-      }
     }
   }
 
