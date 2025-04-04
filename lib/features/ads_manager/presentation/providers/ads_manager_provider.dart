@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:tmdb/core/ads/ad_utils.dart';
@@ -73,10 +75,12 @@ final class AdsManagerProvider extends ChangeNotifier {
   }
 
   void handleBlocState(AdsManagerBloc bloc, AdsManagerState state) {
-    if (state.adsManager.functionCallCount > functionCallAd!.callWaitCount) {
-      if (_admobIds != null && !_isAdLoading && !_isAdShowing) {
-        _isAdLoading = true;
-        _loadInterstitialAd(bloc, functionCallAd!.id);
+    if (Platform.isAndroid) {
+      if (state.adsManager.functionCallCount > functionCallAd!.callWaitCount) {
+        if (_admobIds != null && !_isAdLoading && !_isAdShowing) {
+          _isAdLoading = true;
+          _loadInterstitialAd(bloc, functionCallAd!.id);
+        }
       }
     }
   }
