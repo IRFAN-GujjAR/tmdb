@@ -21,24 +21,6 @@ class TMDbMediaListMenuActionButtonWidget extends StatelessWidget {
           itemBuilder: (context) {
             return [
               PopupMenuItem<SortByCFCategory>(
-                value: SortByCFCategory.asc,
-                child: RadioListTile<SortByCFCategory>(
-                  value: SortByCFCategory.asc,
-                  groupValue: provider.sortBy,
-                  onChanged: (value) {
-                    Navigator.pop(context, value);
-                  },
-                  title: Text(
-                    'Ascending',
-                    style: TextStyle(
-                      // color: ColorUtils.accentColor(context),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  // activeColor: ColorUtils.accentColor(context),
-                ),
-              ),
-              PopupMenuItem<SortByCFCategory>(
                 value: SortByCFCategory.desc,
                 child: RadioListTile<SortByCFCategory>(
                   value: SortByCFCategory.desc,
@@ -47,13 +29,23 @@ class TMDbMediaListMenuActionButtonWidget extends StatelessWidget {
                     Navigator.pop(context, value);
                   },
                   title: Text(
-                    'Descending',
-                    style: TextStyle(
-                      // color: ColorUtils.accentColor(context),
-                      fontWeight: FontWeight.w500,
-                    ),
+                    'Newest',
+                    style: TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  // activeColor: ColorUtils.accentColor(context),
+                ),
+              ),
+              PopupMenuItem<SortByCFCategory>(
+                value: SortByCFCategory.asc,
+                child: RadioListTile<SortByCFCategory>(
+                  value: SortByCFCategory.asc,
+                  groupValue: provider.sortBy,
+                  onChanged: (value) {
+                    Navigator.pop(context, value);
+                  },
+                  title: Text(
+                    'Oldest',
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
             ];
