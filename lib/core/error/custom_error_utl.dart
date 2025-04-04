@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:tmdb/core/api/api_exception_messages.dart';
@@ -14,7 +16,9 @@ final class CustomErrorUtl {
       if (codeType != null) {
         if (codeType == CFErrorType.internal) {
           if (e.message == 'themoviedb_api_error') {
-            final errorEntity = ErrorEntity.fromJson(e.details);
+            final errorEntity = ErrorEntity.fromJson(
+              jsonDecode(jsonEncode(e.details)),
+            );
             return CustomErrorEntity(
               type: CustomErrorTypes.ServerError,
               error: errorEntity,
