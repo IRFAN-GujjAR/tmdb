@@ -96,6 +96,7 @@ class CelebritiesPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 6.0),
                     child: BannerAdWidget(
+                      showDivider: true,
                       adUnitId: AdUtils.bannerAdId(
                         context.read<AdsManagerProvider>().bannerAds!.celebsId,
                       ),
