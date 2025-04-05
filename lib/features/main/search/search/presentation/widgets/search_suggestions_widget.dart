@@ -46,7 +46,10 @@ class SearchSuggestionsWidget extends StatelessWidget {
                     );
                   },
                   leading: Icon(Icons.search, color: Colors.grey),
-                  title: Text(searches[index].searchTitle),
+                  title: Text(
+                    searches[index].searchTitle,
+                    style: TextStyle(color: Colors.grey[400]),
+                  ),
                 );
               },
             );
