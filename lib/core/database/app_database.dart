@@ -6,6 +6,7 @@ import 'package:tmdb/features/main/movies/data/db/tables/movies_table.dart';
 import '../../features/ads_manager/data/db/tables/ads_manager_table.dart';
 import '../../features/main/celebrities/data/db/tables/celebs_table.dart';
 import '../../features/main/search/trending_search/data/db/tables/trending_search_table.dart';
+import '../../features/main/tmdb/data/db/tables/account_details_table.dart';
 import '../../features/main/tv_shows/data/db/tables/tv_shows_table.dart';
 import '../models/celebs/celebrities_list_model.dart';
 import '../models/movie/movies_list_model.dart';
@@ -17,6 +18,7 @@ part 'app_database.g.dart';
 @DriftDatabase(
   tables: [
     AdsManagerTable,
+    AccountDetailsTable,
     MoviesTable,
     TvShowsTable,
     CelebsTable,

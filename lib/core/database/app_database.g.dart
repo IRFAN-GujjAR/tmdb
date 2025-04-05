@@ -214,6 +214,269 @@ class AdsManagerTableCompanion extends UpdateCompanion<AdsManagerTableData> {
   }
 }
 
+class $AccountDetailsTableTable extends AccountDetailsTable
+    with TableInfo<$AccountDetailsTableTable, AccountDetailsTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AccountDetailsTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _usernameMeta = const VerificationMeta(
+    'username',
+  );
+  @override
+  late final GeneratedColumn<String> username = GeneratedColumn<String>(
+    'username',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _profilePathMeta = const VerificationMeta(
+    'profilePath',
+  );
+  @override
+  late final GeneratedColumn<String> profilePath = GeneratedColumn<String>(
+    'profile_path',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, username, profilePath];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'account_details_table';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AccountDetailsTableData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('username')) {
+      context.handle(
+        _usernameMeta,
+        username.isAcceptableOrUnknown(data['username']!, _usernameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_usernameMeta);
+    }
+    if (data.containsKey('profile_path')) {
+      context.handle(
+        _profilePathMeta,
+        profilePath.isAcceptableOrUnknown(
+          data['profile_path']!,
+          _profilePathMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AccountDetailsTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AccountDetailsTableData(
+      id:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}id'],
+          )!,
+      username:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}username'],
+          )!,
+      profilePath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}profile_path'],
+      ),
+    );
+  }
+
+  @override
+  $AccountDetailsTableTable createAlias(String alias) {
+    return $AccountDetailsTableTable(attachedDatabase, alias);
+  }
+}
+
+class AccountDetailsTableData extends DataClass
+    implements Insertable<AccountDetailsTableData> {
+  final int id;
+  final String username;
+  final String? profilePath;
+  const AccountDetailsTableData({
+    required this.id,
+    required this.username,
+    this.profilePath,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['username'] = Variable<String>(username);
+    if (!nullToAbsent || profilePath != null) {
+      map['profile_path'] = Variable<String>(profilePath);
+    }
+    return map;
+  }
+
+  AccountDetailsTableCompanion toCompanion(bool nullToAbsent) {
+    return AccountDetailsTableCompanion(
+      id: Value(id),
+      username: Value(username),
+      profilePath:
+          profilePath == null && nullToAbsent
+              ? const Value.absent()
+              : Value(profilePath),
+    );
+  }
+
+  factory AccountDetailsTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AccountDetailsTableData(
+      id: serializer.fromJson<int>(json['id']),
+      username: serializer.fromJson<String>(json['username']),
+      profilePath: serializer.fromJson<String?>(json['profilePath']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'username': serializer.toJson<String>(username),
+      'profilePath': serializer.toJson<String?>(profilePath),
+    };
+  }
+
+  AccountDetailsTableData copyWith({
+    int? id,
+    String? username,
+    Value<String?> profilePath = const Value.absent(),
+  }) => AccountDetailsTableData(
+    id: id ?? this.id,
+    username: username ?? this.username,
+    profilePath: profilePath.present ? profilePath.value : this.profilePath,
+  );
+  AccountDetailsTableData copyWithCompanion(AccountDetailsTableCompanion data) {
+    return AccountDetailsTableData(
+      id: data.id.present ? data.id.value : this.id,
+      username: data.username.present ? data.username.value : this.username,
+      profilePath:
+          data.profilePath.present ? data.profilePath.value : this.profilePath,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AccountDetailsTableData(')
+          ..write('id: $id, ')
+          ..write('username: $username, ')
+          ..write('profilePath: $profilePath')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, username, profilePath);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AccountDetailsTableData &&
+          other.id == this.id &&
+          other.username == this.username &&
+          other.profilePath == this.profilePath);
+}
+
+class AccountDetailsTableCompanion
+    extends UpdateCompanion<AccountDetailsTableData> {
+  final Value<int> id;
+  final Value<String> username;
+  final Value<String?> profilePath;
+  const AccountDetailsTableCompanion({
+    this.id = const Value.absent(),
+    this.username = const Value.absent(),
+    this.profilePath = const Value.absent(),
+  });
+  AccountDetailsTableCompanion.insert({
+    this.id = const Value.absent(),
+    required String username,
+    this.profilePath = const Value.absent(),
+  }) : username = Value(username);
+  static Insertable<AccountDetailsTableData> custom({
+    Expression<int>? id,
+    Expression<String>? username,
+    Expression<String>? profilePath,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (username != null) 'username': username,
+      if (profilePath != null) 'profile_path': profilePath,
+    });
+  }
+
+  AccountDetailsTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? username,
+    Value<String?>? profilePath,
+  }) {
+    return AccountDetailsTableCompanion(
+      id: id ?? this.id,
+      username: username ?? this.username,
+      profilePath: profilePath ?? this.profilePath,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (username.present) {
+      map['username'] = Variable<String>(username.value);
+    }
+    if (profilePath.present) {
+      map['profile_path'] = Variable<String>(profilePath.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AccountDetailsTableCompanion(')
+          ..write('id: $id, ')
+          ..write('username: $username, ')
+          ..write('profilePath: $profilePath')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $MoviesTableTable extends MoviesTable
     with TableInfo<$MoviesTableTable, MoviesTableData> {
   @override
@@ -1490,6 +1753,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $AdsManagerTableTable adsManagerTable = $AdsManagerTableTable(
     this,
   );
+  late final $AccountDetailsTableTable accountDetailsTable =
+      $AccountDetailsTableTable(this);
   late final $MoviesTableTable moviesTable = $MoviesTableTable(this);
   late final $TvShowsTableTable tvShowsTable = $TvShowsTableTable(this);
   late final $CelebsTableTable celebsTable = $CelebsTableTable(this);
@@ -1501,6 +1766,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
     adsManagerTable,
+    accountDetailsTable,
     moviesTable,
     tvShowsTable,
     celebsTable,
@@ -1669,6 +1935,190 @@ typedef $$AdsManagerTableTableProcessedTableManager =
         >,
       ),
       AdsManagerTableData,
+      PrefetchHooks Function()
+    >;
+typedef $$AccountDetailsTableTableCreateCompanionBuilder =
+    AccountDetailsTableCompanion Function({
+      Value<int> id,
+      required String username,
+      Value<String?> profilePath,
+    });
+typedef $$AccountDetailsTableTableUpdateCompanionBuilder =
+    AccountDetailsTableCompanion Function({
+      Value<int> id,
+      Value<String> username,
+      Value<String?> profilePath,
+    });
+
+class $$AccountDetailsTableTableFilterComposer
+    extends Composer<_$AppDatabase, $AccountDetailsTableTable> {
+  $$AccountDetailsTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get username => $composableBuilder(
+    column: $table.username,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get profilePath => $composableBuilder(
+    column: $table.profilePath,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$AccountDetailsTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $AccountDetailsTableTable> {
+  $$AccountDetailsTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get username => $composableBuilder(
+    column: $table.username,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get profilePath => $composableBuilder(
+    column: $table.profilePath,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$AccountDetailsTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $AccountDetailsTableTable> {
+  $$AccountDetailsTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get username =>
+      $composableBuilder(column: $table.username, builder: (column) => column);
+
+  GeneratedColumn<String> get profilePath => $composableBuilder(
+    column: $table.profilePath,
+    builder: (column) => column,
+  );
+}
+
+class $$AccountDetailsTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $AccountDetailsTableTable,
+          AccountDetailsTableData,
+          $$AccountDetailsTableTableFilterComposer,
+          $$AccountDetailsTableTableOrderingComposer,
+          $$AccountDetailsTableTableAnnotationComposer,
+          $$AccountDetailsTableTableCreateCompanionBuilder,
+          $$AccountDetailsTableTableUpdateCompanionBuilder,
+          (
+            AccountDetailsTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $AccountDetailsTableTable,
+              AccountDetailsTableData
+            >,
+          ),
+          AccountDetailsTableData,
+          PrefetchHooks Function()
+        > {
+  $$AccountDetailsTableTableTableManager(
+    _$AppDatabase db,
+    $AccountDetailsTableTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer:
+              () => $$AccountDetailsTableTableFilterComposer(
+                $db: db,
+                $table: table,
+              ),
+          createOrderingComposer:
+              () => $$AccountDetailsTableTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer:
+              () => $$AccountDetailsTableTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> username = const Value.absent(),
+                Value<String?> profilePath = const Value.absent(),
+              }) => AccountDetailsTableCompanion(
+                id: id,
+                username: username,
+                profilePath: profilePath,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String username,
+                Value<String?> profilePath = const Value.absent(),
+              }) => AccountDetailsTableCompanion.insert(
+                id: id,
+                username: username,
+                profilePath: profilePath,
+              ),
+          withReferenceMapper:
+              (p0) =>
+                  p0
+                      .map(
+                        (e) => (
+                          e.readTable(table),
+                          BaseReferences(db, table, e),
+                        ),
+                      )
+                      .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$AccountDetailsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $AccountDetailsTableTable,
+      AccountDetailsTableData,
+      $$AccountDetailsTableTableFilterComposer,
+      $$AccountDetailsTableTableOrderingComposer,
+      $$AccountDetailsTableTableAnnotationComposer,
+      $$AccountDetailsTableTableCreateCompanionBuilder,
+      $$AccountDetailsTableTableUpdateCompanionBuilder,
+      (
+        AccountDetailsTableData,
+        BaseReferences<
+          _$AppDatabase,
+          $AccountDetailsTableTable,
+          AccountDetailsTableData
+        >,
+      ),
+      AccountDetailsTableData,
       PrefetchHooks Function()
     >;
 typedef $$MoviesTableTableCreateCompanionBuilder =
@@ -2455,6 +2905,8 @@ class $AppDatabaseManager {
   $AppDatabaseManager(this._db);
   $$AdsManagerTableTableTableManager get adsManagerTable =>
       $$AdsManagerTableTableTableManager(_db, _db.adsManagerTable);
+  $$AccountDetailsTableTableTableManager get accountDetailsTable =>
+      $$AccountDetailsTableTableTableManager(_db, _db.accountDetailsTable);
   $$MoviesTableTableTableManager get moviesTable =>
       $$MoviesTableTableTableManager(_db, _db.moviesTable);
   $$TvShowsTableTableTableManager get tvShowsTable =>
