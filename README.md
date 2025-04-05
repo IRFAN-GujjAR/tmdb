@@ -1,9 +1,10 @@
 # TMDb App
 
-TMDb is a cross-platform application developed using flutter framework that uses https://www.themoviedb.org API 
-to fetch Movies, Tv Shows, Celebrities etc information.
+TMDb is a cross-platform application developed using the Flutter framework that uses the https://www.themoviedb.org API 
+to fetch Movies, TV shows, Celebrities, etc, information.
 
-**Video Link for the app** : https://www.youtube.com/watch?v=EtTBT_nbW_A
+***Security***
+- The API key is stored in the Google Cloud Secret Manager, and all the requests are made through Firebase Cloud Functions, which prevents hackers from accessing the API key by reverse engineering the APK, as the API key is not embedded in the APK.
   
 **App ScreenShots**
                                   
