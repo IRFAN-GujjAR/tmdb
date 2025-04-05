@@ -126,6 +126,7 @@ import '../../../features/main/search/trending_search/data/repositories/trending
 import '../../../features/main/search/trending_search/domain/use_cases/trending_search_use_case_load.dart';
 import '../../../features/main/search/trending_search/presentation/blocs/trending_search_bloc.dart';
 import '../../../features/main/tmdb/presentation/pages/tmdb_page.dart';
+import '../../../features/main/tmdb/sub_features/about/presentation/pages/about_page.dart';
 import '../../../features/main/tmdb/sub_features/media_list/data/data_sources/tmdb_media_list_data_source.dart';
 import '../../../features/main/tmdb/sub_features/media_list/data/function_params/tmdb_media_list_cf_params_data.dart';
 import '../../../features/main/tmdb/sub_features/media_list/data/repositories/tmdb_media_list_repo_impl.dart';
@@ -283,13 +284,17 @@ final class AppRouterUtl {
                     (BuildContext context, GoRouterState state) => _tMDBPage,
                 routes: [
                   GoRoute(
+                    path: AppRouterPaths.TMDb_MEDIA_LIST_NAME,
+                    builder:
+                        (context, state) => _tMDBMediaListPage(context, state),
+                  ),
+                  GoRoute(
                     path: AppRouterPaths.APPEARANCES_NAME,
                     builder: (context, state) => const AppearancesPage(),
                   ),
                   GoRoute(
-                    path: AppRouterPaths.TMDb_MEDIA_LIST_NAME,
-                    builder:
-                        (context, state) => _tMDBMediaListPage(context, state),
+                    path: AppRouterPaths.ABOUT_NAME,
+                    builder: (context, state) => const AboutPage(),
                   ),
                 ],
               ),

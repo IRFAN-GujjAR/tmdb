@@ -45,6 +45,9 @@ final class AppRouterPaths {
   static const APPEARANCES_NAME = 'appearances';
   static const APPEARANCES_LOCATION = '$TMDb/$APPEARANCES_NAME';
 
+  static const ABOUT_NAME = 'about';
+  static const ABOUT_LOCATION = '$TMDb/$ABOUT_NAME';
+
   static const TMDb_MEDIA_LIST_NAME = 'tmdb_media_list';
   static const TMDb_MEDIA_LIST_LOCATION = '$TMDb/$TMDb_MEDIA_LIST_NAME';
 

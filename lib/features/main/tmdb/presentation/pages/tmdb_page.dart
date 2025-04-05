@@ -114,6 +114,20 @@ class TMDbPage extends StatelessWidget {
               },
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: CustomListTileWidget(
+              title: 'About',
+              subtitle: 'Information about this app',
+              icon: Icons.info,
+              onPressed: () {
+                appRouterConfig.push(
+                  context,
+                  location: AppRouterPaths.ABOUT_LOCATION,
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
