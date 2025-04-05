@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tmdb/core/ui/widgets/custom_icon_button_widget.dart';
 import 'package:tmdb/features/app_startup/sub_features/user_session/presentation/providers/user_session_provider.dart';
 import 'package:tmdb/features/media_state/presentation/blocs/media_state_state.dart';
 import 'package:tmdb/features/media_state/sub_features/media_tmdb/watchlist/domain/entities/watchlist_media_entity.dart';
@@ -88,17 +89,12 @@ final class DetailsWatchlistWidget extends StatelessWidget {
             userSessionProvider.isLoggedIn &&
             mediaState is MediaStateStateLoaded &&
             (mediaState as MediaStateStateLoaded).mediaState.watchlist;
-        return IconButton(
-          padding: const EdgeInsets.all(0),
-          icon: Icon(
-            showBookMarkFilledIcon ? Icons.bookmark : Icons.bookmark_border,
-          ),
-          onPressed:
-              isEnable
-                  ? () {
-                    _onBookMarkClick(context, userSessionProvider);
-                  }
-                  : null,
+        return CustomIconButtonWidget(
+          icon: showBookMarkFilledIcon ? Icons.bookmark : Icons.bookmark_border,
+          onPressed: () {
+            _onBookMarkClick(context, userSessionProvider);
+          },
+          enable: isEnable,
         );
       },
     );

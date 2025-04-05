@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmdb/core/ui/utils.dart';
+import 'package:tmdb/core/ui/widgets/custom_icon_button_widget.dart';
 import 'package:tmdb/features/app_startup/sub_features/user_session/presentation/providers/user_session_provider.dart';
 import 'package:tmdb/features/media_state/presentation/blocs/media_state_state.dart';
 import 'package:tmdb/features/media_state/sub_features/media_tmdb/favourite/domain/entities/favorite_media_entity.dart';
@@ -91,17 +92,13 @@ final class DetailsFavoriteWidget extends StatelessWidget {
             mediaState is MediaStateStateLoaded &&
             (mediaState as MediaStateStateLoaded).mediaState.favorite;
 
-        return IconButton(
-          padding: const EdgeInsets.all(0),
-          icon: Icon(
-            showFavouriteFilledIcon ? Icons.favorite : Icons.favorite_border,
-          ),
-          onPressed:
-              isEnable
-                  ? () {
-                    onFavouriteClick(context, userSessionProvider);
-                  }
-                  : null,
+        return CustomIconButtonWidget(
+          icon:
+              showFavouriteFilledIcon ? Icons.favorite : Icons.favorite_border,
+          onPressed: () {
+            onFavouriteClick(context, userSessionProvider);
+          },
+          enable: isEnable,
         );
       },
     );

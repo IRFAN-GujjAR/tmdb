@@ -8,7 +8,7 @@ import 'package:tmdb/core/ui/widgets/custom_error_widget.dart';
 import 'package:tmdb/core/ui/widgets/custom_image_widget.dart';
 import 'package:tmdb/core/ui/widgets/list/media_items_horizontal_widget.dart';
 import 'package:tmdb/core/ui/widgets/list/params/media_items_horizontal_params.dart';
-import 'package:tmdb/core/ui/widgets/share_pop_menu_button_widget.dart';
+import 'package:tmdb/core/ui/widgets/share_menu_button_widget.dart';
 import 'package:tmdb/core/ui/widgets/text_row_widget.dart';
 import 'package:tmdb/core/urls/urls.dart';
 import 'package:tmdb/features/main/celebrities/sub_features/details/domain/entities/movie_credits_entity.dart';
@@ -294,7 +294,7 @@ class CelebrityDetailsPage extends StatelessWidget {
             actions:
                 state is CelebrityDetailsStateLoaded
                     ? <Widget>[
-                      SharePopMenuButtonWidget(
+                      ShareMenuButtonWidget(
                         url: URLS.celebrityShareUrl(
                           celebId: _extra.id,
                           celebName: _extra.celebName,

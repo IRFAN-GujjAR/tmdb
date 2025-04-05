@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmdb/core/firebase/cloud_functions/cloud_functions_utl.dart';
-import 'package:tmdb/core/ui/widgets/share_pop_menu_button_widget.dart';
+import 'package:tmdb/core/ui/widgets/share_menu_button_widget.dart';
 import 'package:tmdb/core/urls/urls.dart';
 import 'package:tmdb/features/media_state/sub_features/media_tmdb/favourite/data/data_sources/favorite_media_data_source.dart';
 import 'package:tmdb/features/media_state/sub_features/media_tmdb/favourite/data/repositories/favorite_media_repo_impl.dart';
@@ -72,7 +72,7 @@ final class DetailsMenuItemsWidget {
           mediaState: mediaState,
         ),
       ),
-      SharePopMenuButtonWidget(
+      ShareMenuButtonWidget(
         url:
             mediaType.isMovie
                 ? URLS.movieShareUrl(movieId: mediaId, title: title)

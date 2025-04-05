@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmdb/core/ui/initialize_app.dart';
+import 'package:tmdb/core/ui/widgets/custom_icon_button_widget.dart';
 import 'package:tmdb/features/app_startup/sub_features/user_session/presentation/providers/user_session_provider.dart';
 
 import '../../../../features/media_state/presentation/blocs/media_state_state.dart';
@@ -60,15 +61,12 @@ final class DetailsRateWidget extends StatelessWidget {
     final isEnable =
         (mediaState is MediaStateStateLoaded) ||
         !userSessionProvider.isLoggedIn;
-    return IconButton(
-      padding: const EdgeInsets.all(0),
-      icon: Icon(showStarFilledIcon ? Icons.star : Icons.star_border),
-      onPressed:
-          isEnable
-              ? () {
-                _onRateClick(context, userSessionProvider);
-              }
-              : null,
+    return CustomIconButtonWidget(
+      icon: showStarFilledIcon ? Icons.star : Icons.star_border,
+      onPressed: () {
+        _onRateClick(context, userSessionProvider);
+      },
+      enable: isEnable,
     );
   }
 }
