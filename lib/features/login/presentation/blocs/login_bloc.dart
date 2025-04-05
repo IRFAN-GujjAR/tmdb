@@ -6,6 +6,9 @@ import 'package:tmdb/core/ui/initialize_app.dart';
 import 'package:tmdb/features/ads_manager/presentation/blocs/ads_manager_bloc.dart';
 import 'package:tmdb/features/login/domain/use_cases/login_use_case.dart';
 import 'package:tmdb/features/login/domain/use_cases/params/login_params.dart';
+import 'package:tmdb/features/main/tmdb/domain/entities/account_details_entity.dart';
+import 'package:tmdb/features/main/tmdb/domain/use_cases/account_details_use_case_save.dart';
+import 'package:tmdb/features/main/tmdb/domain/use_cases/params/account_details_params_save.dart';
 
 import '../../../app_startup/sub_features/user_session/domain/entities/user_session_entity.dart';
 import '../../../app_startup/sub_features/user_session/domain/use_cases/user_session_store_use_case.dart';
@@ -17,13 +20,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AdsManagerBloc _adsManagerBloc;
   final LoginUseCase _loginUseCase;
   final UserSessionStoreUseCase _storeUseCase;
+  final AccountDetailsUseCaseSave _accountDetailsUseCaseSave;
 
   LoginBloc(
     this._adsManagerBloc, {
     required LoginUseCase loginUseCase,
     required UserSessionStoreUseCase storeUseCase,
+    required AccountDetailsUseCaseSave accountDetailsUseCaseSave,
   }) : _loginUseCase = loginUseCase,
        _storeUseCase = storeUseCase,
+       _accountDetailsUseCaseSave = accountDetailsUseCaseSave,
        super(LoginStateEmpty()) {
     on<LoginEvent>((event, emit) async {
       switch (event) {
@@ -37,18 +43,33 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _onLogin(LoginEventUser event, Emitter<LoginState> emit) async {
     emit(LoginStateLoggingIn());
     try {
-      final userInfo = await _loginUseCase.call(
+      final loginEntity = await _loginUseCase.call(
         LoginParams(event.userName, event.password),
       );
+      AdsManagerBloc.increment(_adsManagerBloc);
       await _storeUseCase.call(
         UserSessionEntity(
-          userId: userInfo.userId,
-          username: userInfo.username,
-          sessionId: userInfo.sessionId,
+          userId: loginEntity.userId,
+          sessionId: loginEntity.sessionId,
         ),
       );
-      AdsManagerBloc.increment(_adsManagerBloc);
-      emit(LoginStateLoggedIn(userInfo));
+      await _accountDetailsUseCaseSave.call(
+        AccountDetailsParamsSave(
+          userId: loginEntity.userId,
+          accountDetails: AccountDetailsEntity(
+            username: loginEntity.username,
+            profilePath: loginEntity.profilePath,
+          ),
+        ),
+      );
+      emit(
+        LoginStateLoggedIn(
+          UserSessionEntity(
+            userId: loginEntity.userId,
+            sessionId: loginEntity.sessionId,
+          ),
+        ),
+      );
     } catch (e) {
       logger.e(e);
       final error = CustomErrorUtl.getError(e);

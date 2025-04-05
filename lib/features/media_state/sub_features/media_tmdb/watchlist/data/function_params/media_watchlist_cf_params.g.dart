@@ -15,6 +15,7 @@ Map<String, dynamic> _$MediaWatchlistCFParamsToJson(
 
 const _$TMDbCFCategoryEnumMap = {
   TMDbCFCategory.login: 'login',
+  TMDbCFCategory.accountDetails: 'account_details',
   TMDbCFCategory.mediaList: 'media_list',
   TMDbCFCategory.mediaState: 'media_state',
   TMDbCFCategory.mediaFavorite: 'media_favorite',

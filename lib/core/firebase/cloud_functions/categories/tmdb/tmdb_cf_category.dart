@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 enum TMDbCFCategory {
   login,
+  @JsonValue('account_details')
+  accountDetails,
   @JsonValue('media_list')
   mediaList,
   @JsonValue('media_state')

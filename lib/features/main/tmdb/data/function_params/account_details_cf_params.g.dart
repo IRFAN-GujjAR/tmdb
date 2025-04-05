@@ -1,16 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'media_state_cf_params.dart';
+part of 'account_details_cf_params.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Map<String, dynamic> _$MediaStateCFParamsToJson(MediaStateCFParams instance) =>
-    <String, dynamic>{
-      'category': _$TMDbCFCategoryEnumMap[instance.category]!,
-      'params_data': instance.data.toJson(),
-    };
+Map<String, dynamic> _$AccountDetailsCFParamsToJson(
+  AccountDetailsCFParams instance,
+) => <String, dynamic>{
+  'category': _$TMDbCFCategoryEnumMap[instance.category]!,
+  'params_data': instance.data.toJson(),
+};
 
 const _$TMDbCFCategoryEnumMap = {
   TMDbCFCategory.login: 'login',

@@ -22,4 +22,5 @@ final class CFJsonKeys {
   static const VALUE = 'value';
 
   static const MEDIA_TYPE = 'media_type';
+  static const ACCOUNT_DETAILS = 'account_details';
 }

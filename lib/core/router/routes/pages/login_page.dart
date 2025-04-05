@@ -17,6 +17,16 @@ Widget _loginPage(BuildContext context, GoRouterState state) {
                 storeUseCase: UserSessionStoreUseCase(
                   UserSessionRepoImpl(UserSessionDataSourceImpl()),
                 ),
+                accountDetailsUseCaseSave: AccountDetailsUseCaseSave(
+                  AccountDetailsRepoImpl(
+                    AccountDetailsLocalDataSourceImpl(
+                      AccountDetailsDao(appDatabase),
+                    ),
+                    AccountDetailsRemoteDataSourceImpl(
+                      CloudFunctionsUtl.tMDBFunction,
+                    ),
+                  ),
+                ),
               ),
         ),
       ],

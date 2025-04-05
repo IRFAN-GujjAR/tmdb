@@ -13,6 +13,8 @@ class AccountDetailsDao extends DatabaseAccessor<AppDatabase>
   Stream<AccountDetailsTableData?> get watchAccountDetails =>
       select(accountDetailsTable).watchSingleOrNull();
 
-  Future<void> insertAccountDetails(AccountDetailsTableCompanion entry) =>
+  Future<void> saveAccountDetails(AccountDetailsTableCompanion entry) =>
       into(accountDetailsTable).insertOnConflictUpdate(entry);
+
+  Future<void> get deleteAccountDetails => delete(accountDetailsTable).go();
 }

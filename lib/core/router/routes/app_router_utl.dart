@@ -9,6 +9,7 @@ import 'package:tmdb/core/ui/initialize_app.dart';
 import 'package:tmdb/features/ads_manager/presentation/blocs/ads_manager_bloc.dart';
 import 'package:tmdb/features/app_startup/sub_features/remote_config/data/repositories/remote_config_repo_impl.dart';
 import 'package:tmdb/features/app_startup/sub_features/remote_config/domain/use_cases/remote_config_use_case.dart';
+import 'package:tmdb/features/app_startup/sub_features/user_session/domain/use_cases/user_session_delete_use_case.dart';
 import 'package:tmdb/features/app_startup/sub_features/user_session/presentation/providers/user_session_provider.dart';
 import 'package:tmdb/features/main/cast_crew/presentation/pages/see_all_cast_crew_page.dart';
 import 'package:tmdb/features/main/celebrities/data/data_sources/celebrities_local_data_source.dart';
@@ -61,6 +62,16 @@ import 'package:tmdb/features/main/search/search/presentation/providers/search_b
 import 'package:tmdb/features/main/search/trending_search/data/data_sources/trending_search_local_data_source.dart';
 import 'package:tmdb/features/main/search/trending_search/data/db/dao/trending_search_dao.dart';
 import 'package:tmdb/features/main/search/trending_search/domain/use_cases/trending_search_use_case_watch.dart';
+import 'package:tmdb/features/main/tmdb/data/data_sources/account_details_local_data_source.dart';
+import 'package:tmdb/features/main/tmdb/data/data_sources/account_details_remote_data_source.dart';
+import 'package:tmdb/features/main/tmdb/data/db/dao/account_details_dao.dart';
+import 'package:tmdb/features/main/tmdb/data/repositories/account_details_repo_impl.dart';
+import 'package:tmdb/features/main/tmdb/domain/use_cases/account_details_use_case_delete.dart';
+import 'package:tmdb/features/main/tmdb/domain/use_cases/account_details_use_case_load.dart';
+import 'package:tmdb/features/main/tmdb/domain/use_cases/account_details_use_case_save.dart';
+import 'package:tmdb/features/main/tmdb/domain/use_cases/account_details_use_case_watch.dart';
+import 'package:tmdb/features/main/tmdb/presentation/blocs/tmdb_bloc.dart';
+import 'package:tmdb/features/main/tmdb/presentation/blocs/tmdb_event.dart';
 import 'package:tmdb/features/main/tmdb/sub_features/appearances/presentation/pages/appearances_page.dart';
 import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/providers/tmdb_media_list_provider.dart';
 import 'package:tmdb/features/main/tv_shows/data/data_sources/tv_shows_local_data_source.dart';
@@ -281,7 +292,8 @@ final class AppRouterUtl {
                 // bottom navigation bar.
                 path: AppRouterPaths.TMDb,
                 builder:
-                    (BuildContext context, GoRouterState state) => _tMDBPage,
+                    (BuildContext context, GoRouterState state) =>
+                        _tMDBPage(context),
                 routes: [
                   GoRoute(
                     path: AppRouterPaths.TMDb_MEDIA_LIST_NAME,

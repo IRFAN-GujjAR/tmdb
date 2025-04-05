@@ -10,13 +10,13 @@ abstract class UserSessionDataSource {
 
 final class UserSessionDataSourceImpl implements UserSessionDataSource {
   final String _userId = 'user_id';
-  final String _username = 'username';
   final String _sessionId = 'session_id';
   final AndroidOptions _androidOptions = const AndroidOptions(
     encryptedSharedPreferences: true,
   );
-  final _iOSOptions =
-      IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+  final _iOSOptions = IOSOptions(
+    accessibility: KeychainAccessibility.first_unlock,
+  );
   FlutterSecureStorage get _storage =>
       FlutterSecureStorage(aOptions: _androidOptions, iOptions: _iOSOptions);
 
@@ -27,21 +27,15 @@ final class UserSessionDataSourceImpl implements UserSessionDataSource {
       return UserSessionModel.empty();
     } else {
       final userId = int.parse(result[_userId]!);
-      final username = result[_username]!;
       final sessionId = result[_sessionId]!;
-
-      return UserSessionModel(
-          userId: userId, username: username, sessionId: sessionId);
+      return UserSessionModel(userId: userId, sessionId: sessionId);
     }
   }
 
   @override
   Future<void> store(UserSessionModel userSession) async {
     await _storage.write(key: _userId, value: userSession.userId.toString());
-    await _storage.write(
-        key: _username, value: userSession.username.toString());
-    await _storage.write(
-        key: _sessionId, value: userSession.sessionId.toString());
+    await _storage.write(key: _sessionId, value: userSession.sessionId);
   }
 
   @override

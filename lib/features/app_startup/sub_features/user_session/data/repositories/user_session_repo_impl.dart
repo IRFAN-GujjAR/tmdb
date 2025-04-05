@@ -12,11 +12,12 @@ final class UserSessionRepoImpl implements UserSessionRepo {
   Future<UserSessionModel> get load => _dataSource.load;
 
   @override
-  Future<void> store(UserSessionEntity userSession) =>
-      _dataSource.store(UserSessionModel(
-          userId: userSession.userId,
-          username: userSession.username,
-          sessionId: userSession.sessionId));
+  Future<void> store(UserSessionEntity userSession) => _dataSource.store(
+    UserSessionModel(
+      userId: userSession.userId,
+      sessionId: userSession.sessionId,
+    ),
+  );
 
   @override
   Future<void> get delete => _dataSource.delete;

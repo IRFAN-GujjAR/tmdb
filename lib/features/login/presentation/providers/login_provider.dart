@@ -103,12 +103,11 @@ final class LoginProvider extends ChangeNotifier {
     required LoginStateLoggedIn state,
     required NavigationCategory category,
   }) {
-    context.read<UserSessionProvider>().store(state.userSession).then((value) {
-      context.read<LoginStatusBloc>().add(LoginStatusEventLogin());
-      if (category == NavigationCategory.Forward)
-        appRouterConfig.go(context, location: AppRouterPaths.MOVIES);
-      else
-        appRouterConfig.pop(context);
-    });
+    context.read<UserSessionProvider>().setUserSession = state.userSession;
+    context.read<LoginStatusBloc>().add(LoginStatusEventLogin());
+    if (category == NavigationCategory.Forward)
+      appRouterConfig.go(context, location: AppRouterPaths.MOVIES);
+    else
+      appRouterConfig.pop(context);
   }
 }
