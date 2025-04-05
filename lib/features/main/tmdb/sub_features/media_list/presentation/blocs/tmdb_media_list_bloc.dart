@@ -29,7 +29,6 @@ final class TMDbMediaListBloc
   ) async {
     emit(TMDbMediaListStateLoading());
     try {
-      logger.d(event.cfParamsData.movieList);
       final tMDBMediaList = await _useCase.call(event.cfParamsData);
       AdsManagerBloc.increment(_adsManagerBloc);
       if (tMDBMediaList.isMovies || tMDBMediaList.isTvShows)
