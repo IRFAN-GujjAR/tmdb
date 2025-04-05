@@ -6,7 +6,7 @@ import 'package:tmdb/core/firebase/cloud_functions/cloud_functions_json_keys.dar
 
 part 'tmdb_media_list_cf_params_data.g.dart';
 
-@JsonSerializable(createFactory: false)
+@JsonSerializable(createFactory: false, ignoreUnannotated: true)
 final class TMDbMediaListCfParamsData {
   @JsonKey(name: CFJsonKeys.LIST_CATEGORY)
   final TMDbMediaListCFCategory listCategory;
