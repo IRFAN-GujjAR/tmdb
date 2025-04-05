@@ -5,6 +5,9 @@ to fetch Movies, TV shows, Celebrities, etc, information.
 
 ***Playstore Link***: https://play.google.com/store/apps/details?id=com.irfangujjar.tmdb&hl=en
 
+***Code Structure***
+- Clean Architecture
+
 ***Security***
 - The API key is stored in the Google Cloud Secret Manager, and all the requests are made through Firebase Cloud Functions, which prevents hackers from accessing the API key by reverse engineering the APK, as the API key is not embedded in the APK.
 - Firebase App Check is enabled, which only allows APK or app bundle signed by only developer Google Play Signing key to make requests to Firebase Cloud Functions to avoid misuse.
