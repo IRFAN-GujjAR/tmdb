@@ -30,7 +30,10 @@ class TMDbMediaListMenuActionButtonWidget extends StatelessWidget {
                   },
                   title: Text(
                     'Newest',
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -44,7 +47,10 @@ class TMDbMediaListMenuActionButtonWidget extends StatelessWidget {
                   },
                   title: Text(
                     'Oldest',
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
