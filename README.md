@@ -9,6 +9,8 @@ to fetch Movies, TV shows, Celebrities, etc, information.
 - The API key is stored in the Google Cloud Secret Manager, and all the requests are made through Firebase Cloud Functions, which prevents hackers from accessing the API key by reverse engineering the APK, as the API key is not embedded in the APK.
 - Firebase App Check is enabled, which only allows APK or app bundle signed by only developer Google Play Signing key to make requests to Firebase Cloud Functions to avoid misuse.
 
+***Cache***
+- Flutter Drift sqlite3 library is used for caching data on Movies, TV Shows, Celebrities, Search, and TMDb pages.
   
 **App ScreenShots**
                                   
