@@ -382,19 +382,4 @@ class _MoviesItemConfiguration {
         break;
     }
   }
-
-  // String get imageSize {
-  //   switch (category) {
-  //     case MoviesCategories.Popular:
-  //     case MoviesCategories.Trending:
-  //     case MoviesCategories.Upcoming:
-  //     case MoviesCategories.DetailsRecommended:
-  //     case MoviesCategories.DetailsSimilar:
-  //       return PosterSizes.w185;
-  //     case MoviesCategories.InTheatres:
-  //       return BackDropSizes.w300;
-  //     case MoviesCategories.TopRated:
-  //       return PosterSizes.w92;
-  //   }
-  // }
 }
