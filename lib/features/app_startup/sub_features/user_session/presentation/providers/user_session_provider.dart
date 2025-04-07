@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-
 import '../../domain/entities/user_session_entity.dart';
 import '../../domain/repositories/user_session_repo.dart';
-import '../../domain/use_cases/user_session_delete_use_case.dart';
 import '../../domain/use_cases/user_session_load_use_case.dart';
 
 final class UserSessionProvider extends ChangeNotifier {
   late UserSessionLoadUseCase _loadUseCase;
-  late UserSessionDeleteUseCase _deleteUseCase;
 
   UserSessionProvider(UserSessionRepo repo) {
     _loadUseCase = UserSessionLoadUseCase(repo);
-    _deleteUseCase = UserSessionDeleteUseCase(repo);
   }
 
   UserSessionEntity _userSession = UserSessionEntity.empty();

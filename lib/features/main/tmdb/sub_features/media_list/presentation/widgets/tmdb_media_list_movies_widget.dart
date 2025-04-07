@@ -8,7 +8,6 @@ import 'package:tmdb/features/main/tmdb/sub_features/media_list/presentation/pro
 import '../../../../../../../core/firebase/cloud_functions/categories/tmdb/tmdb_cf_category.dart';
 import '../../../../../../../core/firebase/cloud_functions/categories/tmdb/tmdb_media_list_cf_category.dart';
 import '../../../../../../../core/firebase/cloud_functions/cloud_functions_utl.dart';
-import '../../../../../../app_startup/sub_features/user_session/presentation/providers/user_session_provider.dart';
 import '../../../../../movies/sub_features/see_all/data/data_sources/see_all_movies_data_source.dart';
 import '../../../../../movies/sub_features/see_all/data/repositories/see_all_movies_repo_impl.dart';
 import '../../../../../movies/sub_features/see_all/domain/use_cases/see_all_movies_use_case.dart';
@@ -38,7 +37,6 @@ class _TMDbMediaListMoviesWidgetState extends State<TMDbMediaListMoviesWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final user = context.read<UserSessionProvider>().userSession;
     return ChangeNotifierProvider(
       create:
           (BuildContext context) => SeeAllMoviesProvider(

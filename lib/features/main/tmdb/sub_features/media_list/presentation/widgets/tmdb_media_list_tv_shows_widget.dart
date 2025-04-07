@@ -7,7 +7,6 @@ import '../../../../../../../core/firebase/cloud_functions/categories/tmdb/tmdb_
 import '../../../../../../../core/firebase/cloud_functions/categories/tmdb/tmdb_media_list_cf_category.dart';
 import '../../../../../../../core/firebase/cloud_functions/cloud_functions_utl.dart';
 import '../../../../../../ads_manager/presentation/blocs/ads_manager_bloc.dart';
-import '../../../../../../app_startup/sub_features/user_session/presentation/providers/user_session_provider.dart';
 import '../../../../../tv_shows/sub_features/see_all/data/data_sources/see_all_tv_shows_data_source.dart';
 import '../../../../../tv_shows/sub_features/see_all/data/repositories/see_all_tv_shows_repo_impl.dart';
 import '../../../../../tv_shows/sub_features/see_all/domain/use_cases/see_all_tv_shows_use_case.dart';
@@ -38,7 +37,6 @@ class _TMDbMediaListTvShowsWidget extends State<TMDbMediaListTvShowsWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final user = context.read<UserSessionProvider>().userSession;
     return ChangeNotifierProvider(
       create:
           (BuildContext context) => SeeAllTvShowsProvider(
