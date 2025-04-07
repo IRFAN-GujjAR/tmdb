@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:tmdb/core/ui/widgets/refresh_indicator_widget.dart';
 import 'package:tmdb/features/main/tmdb/domain/entities/account_details_entity.dart';
 import 'package:tmdb/features/main/tmdb/presentation/blocs/tmdb_bloc.dart';
 import 'package:tmdb/features/main/tmdb/presentation/blocs/tmdb_event.dart';
@@ -23,9 +24,9 @@ class TMDbbWidget extends StatelessWidget {
     context.read<TMDbBloc>().add(const TMDbEventSignOut());
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _bodyWidget(BuildContext context) {
     return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
       child: Container(
         margin: EdgeInsets.only(top: 30),
         child: Column(
@@ -60,6 +61,27 @@ class TMDbbWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<UserSessionProvider>(
+      builder: (context, provider, _) {
+        return provider.isLoggedIn
+            ? RefreshIndicatorWidget(
+              onRefresh: (completer) {
+                context.read<TMDbBloc>().add(
+                  TMDbEventRefreshAccountDetails(
+                    provider.userSession.sessionId,
+                    completer,
+                  ),
+                );
+              },
+              child: _bodyWidget(context),
+            )
+            : _bodyWidget(context);
+      },
     );
   }
 }
