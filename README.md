@@ -26,7 +26,7 @@ to fetch information on movies, TV shows, celebrities, etc.
 
 # License
 
-Copyright (c) 2020 IRFAN GujjAR
+Copyright (c) 2025 Muhammad Irfan Ali
 
 http://www.apache.org/licenses/LICENSE-2.0
 
