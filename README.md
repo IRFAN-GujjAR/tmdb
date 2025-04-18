@@ -9,7 +9,7 @@ to fetch information on movies, TV shows, celebrities, etc.
 - Clean Architecture
 
 ***Security***
-- The API key is stored in the Google Cloud Secret Manager, and all the requests are made through Firebase Cloud Functions, which prevents hackers from accessing the API key by reverse engineering the APK, as the API key is not embedded in the APK.
+- The API key is stored in the Google Cloud Secret Manager, and all the requests are made through Firebase Cloud Functions (written in TypeScript), which prevents hackers from accessing the API key by reverse engineering the APK, as the API key is not embedded in the APK.
 - Firebase App Check is enabled, which only allows APK or app bundle signed by the developer's Google Play Signing key to make requests to Firebase Cloud Functions to avoid misuse.
 
 ***Cache***
