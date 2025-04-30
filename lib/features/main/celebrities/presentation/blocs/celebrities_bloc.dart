@@ -34,12 +34,12 @@ class CelebritiesBloc extends Bloc<CelebritiesEvent, CelebritiesState> {
     on<CelebritiesEvent>((event, emit) async {
       switch (event) {
         case CelebritiesEventLoad():
-          _onLoad(emit);
+          await _onLoad(emit);
         case CelebritiesEventUpdated():
           _onUpdated(event, emit);
           break;
         case CelebritiesEventRefresh():
-          _onLoad(emit, completer: event.completer);
+          await _onLoad(emit, completer: event.completer);
           break;
       }
     });
@@ -95,8 +95,9 @@ class CelebritiesBloc extends Bloc<CelebritiesEvent, CelebritiesState> {
             error: errorEntity,
           ),
         );
-      } else
+      } else {
         emit(CelebritiesStateErrorWithoutCache(error: errorEntity));
+      }
     }
   }
 
