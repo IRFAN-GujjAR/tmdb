@@ -13,6 +13,7 @@ final class UserSessionDataSourceImpl implements UserSessionDataSource {
   final String _sessionId = 'session_id';
   final AndroidOptions _androidOptions = const AndroidOptions(
     encryptedSharedPreferences: true,
+    resetOnError: true,
   );
   final _iOSOptions = IOSOptions(
     accessibility: KeychainAccessibility.first_unlock,

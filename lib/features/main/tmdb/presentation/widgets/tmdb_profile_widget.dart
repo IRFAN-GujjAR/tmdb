@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmdb/core/router/routes/app_router_paths.dart';
 import 'package:tmdb/core/ui/initialize_app.dart';
 import 'package:tmdb/core/ui/utils.dart';
 import 'package:tmdb/core/ui/widgets/custom_image_widget.dart';
 import 'package:tmdb/core/urls/urls.dart';
+import 'package:tmdb/features/app_startup/sub_features/user_session/presentation/providers/user_session_provider.dart';
 import 'package:tmdb/features/main/celebrities/sub_features/details/presentation/pages/photo/extra/celebrity_photo_page_extra.dart';
 import 'package:tmdb/features/main/tmdb/domain/entities/account_details_entity.dart';
 
@@ -13,7 +15,8 @@ class TMDbProfileWidget extends StatelessWidget {
   const TMDbProfileWidget({super.key, required this.accountDetails});
 
   Widget _profileImageWidget(BuildContext context) {
-    return accountDetails?.profilePath != null
+    return context.read<UserSessionProvider>().isLoggedIn &&
+            accountDetails?.profilePath != null
         ? GestureDetector(
           onTap: () {
             appRouterConfig.push(
@@ -49,7 +52,9 @@ class TMDbProfileWidget extends StatelessWidget {
         _profileImageWidget(context),
         SizedBox(width: 10),
         Text(
-          accountDetails?.username ?? 'Your Name',
+          context.read<UserSessionProvider>().isLoggedIn
+              ? accountDetails?.username ?? 'Your Name'
+              : 'Your Name',
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 28),
         ),
       ],
