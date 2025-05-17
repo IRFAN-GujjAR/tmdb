@@ -324,13 +324,21 @@ class TvShowsCategoryWidget extends StatelessWidget {
         ),
         if (!(category == TvShowsCategories.DetailsRecommended ||
             category == TvShowsCategories.DetailsSimilar))
-          !isIOS && category == TvShowsCategories.AiringToday
+          category == TvShowsCategories.AiringToday
               ? Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 6.0),
                 child: BannerAdWidget(
                   showDivider: true,
                   adUnitId: AdUtils.bannerAdId(
-                    context.read<AdsManagerProvider>().bannerAds!.tvShowsId,
+                    isIOS
+                        ? context
+                            .read<AdsManagerProvider>()
+                            .bannerAds!
+                            .tvShowsIdIOS
+                        : context
+                            .read<AdsManagerProvider>()
+                            .bannerAds!
+                            .tvShowsId,
                   ),
                   adSize: AdSize.banner,
                 ),

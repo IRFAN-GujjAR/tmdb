@@ -11,6 +11,7 @@ import 'package:tmdb/features/app_startup/sub_features/remote_config/domain/enti
 import 'package:tmdb/features/app_startup/sub_features/remote_config/domain/entities/ads/banner_ads_entity.dart';
 import 'package:tmdb/features/app_startup/sub_features/remote_config/domain/entities/ads/interstitial_ad_function_call_entity.dart';
 
+import '../../../../main.dart';
 import '../blocs/ads_manager_event.dart';
 
 final class AdsManagerProvider extends ChangeNotifier {
@@ -75,15 +76,25 @@ final class AdsManagerProvider extends ChangeNotifier {
   }
 
   void handleBlocState(AdsManagerBloc bloc, AdsManagerState state) {
-    if (Platform.isAndroid) {
-      if (functionCallAd != null)
-        if (state.adsManager.functionCallCount >
-            functionCallAd!.callWaitCount) {
-          if (_admobIds != null && !_isAdLoading && !_isAdShowing) {
-            _isAdLoading = true;
-            _loadInterstitialAd(bloc, functionCallAd!.id);
-          }
+    if (functionCallAd != null)
+      if (state.adsManager.functionCallCount > functionCallAd!.callWaitCount) {
+        if (_admobIds != null && !_isAdLoading && !_isAdShowing) {
+          _isAdLoading = true;
+          _loadInterstitialAd(
+            bloc,
+            isIOS ? functionCallAd!.idIOS : functionCallAd!.id,
+          );
         }
+      }
+  }
+
+  void showiOSAd(AdsManagerBloc bloc) {
+    if (_admobIds != null && !_isAdLoading && !_isAdShowing) {
+      _isAdLoading = true;
+      _loadInterstitialAd(
+        bloc,
+        Platform.isAndroid ? functionCallAd!.id : functionCallAd!.idIOS,
+      );
     }
   }
 

@@ -21,13 +21,12 @@ import 'package:tmdb/features/main/celebrities/sub_features/see_all/data/functio
 import 'package:tmdb/features/main/celebrities/sub_features/see_all/data/function_params/celebs_list_cf_params_data.dart';
 import 'package:tmdb/features/main/celebrities/sub_features/see_all/presentation/pages/extra/see_all_celebs_page_extra.dart';
 import 'package:tmdb/features/main/home/presentation/pages/home_page.dart';
-import 'package:tmdb/main.dart';
 
 import '../../../../../core/ads/ad_utils.dart';
 import '../../../../../core/ui/widgets/banner_ad_widget.dart';
 import '../../../../../core/ui/widgets/custom_error_widget.dart';
-import '../../../../../core/ui/widgets/divider_widget.dart';
 import '../../../../../core/ui/widgets/loading_widget.dart';
+import '../../../../../main.dart';
 
 Map<CelebrityCategories, String> celebritiesCategoryName = {
   CelebrityCategories.Popular: 'Popular',
@@ -90,20 +89,26 @@ class CelebritiesPage extends StatelessWidget {
               firstHalfPopular: firstHalfPopular,
               secondHalfPopular: secondHalfPopular,
             ),
-            isIOS
-                ? DividerWidget(topPadding: 10)
-                : Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 6.0),
-                    child: BannerAdWidget(
-                      showDivider: true,
-                      adUnitId: AdUtils.bannerAdId(
-                        context.read<AdsManagerProvider>().bannerAds!.celebsId,
-                      ),
-                      adSize: AdSize.banner,
-                    ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 6.0),
+                child: BannerAdWidget(
+                  showDivider: true,
+                  adUnitId: AdUtils.bannerAdId(
+                    isIOS
+                        ? context
+                            .read<AdsManagerProvider>()
+                            .bannerAds!
+                            .celebsIdIOS
+                        : context
+                            .read<AdsManagerProvider>()
+                            .bannerAds!
+                            .celebsId,
                   ),
+                  adSize: AdSize.banner,
                 ),
+              ),
+            ),
             _buildTextRow(
               context,
               CelebrityCategories.Trending,

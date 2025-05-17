@@ -65,16 +65,20 @@ class TrendingSearchWidget extends StatelessWidget {
                   children: [
                     button,
                     SizedBox(height: 20),
-                    if (!isIOS)
-                      BannerAdWidget(
-                        adUnitId: AdUtils.bannerAdId(
-                          context
-                              .read<AdsManagerProvider>()
-                              .bannerAds!
-                              .searchId,
-                        ),
-                        adSize: AdSize.largeBanner,
+                    BannerAdWidget(
+                      adUnitId: AdUtils.bannerAdId(
+                        isIOS
+                            ? context
+                                .read<AdsManagerProvider>()
+                                .bannerAds!
+                                .searchIdIOS
+                            : context
+                                .read<AdsManagerProvider>()
+                                .bannerAds!
+                                .searchId,
                       ),
+                      adSize: AdSize.largeBanner,
+                    ),
                     SizedBox(height: 20),
                   ],
                 )

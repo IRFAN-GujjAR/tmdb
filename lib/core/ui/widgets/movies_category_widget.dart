@@ -14,7 +14,6 @@ import 'package:tmdb/features/main/movies/sub_features/details/presentation/page
 import 'package:tmdb/features/main/movies/sub_features/see_all/data/function_params/movies_list_cf_params.dart';
 import 'package:tmdb/features/main/movies/sub_features/see_all/data/function_params/movies_list_cf_params_data.dart';
 import 'package:tmdb/features/main/movies/sub_features/see_all/presentation/pages/extra/see_all_movies_page_extra.dart';
-import 'package:tmdb/main.dart';
 
 import '../../entities/movie/movie_entity.dart';
 import '../../urls/urls.dart';
@@ -322,7 +321,7 @@ class MoviesCategoriesWidget extends StatelessWidget {
             ),
           ),
         ),
-        if ((!isIOS && category == MoviesCategories.Popular) ||
+        if (category == MoviesCategories.Popular ||
             category == MoviesCategories.Upcoming ||
             category == MoviesCategories.DetailsRecommended ||
             category == MoviesCategories.DetailsSimilar)

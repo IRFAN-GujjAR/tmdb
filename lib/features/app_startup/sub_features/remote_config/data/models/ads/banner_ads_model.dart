@@ -8,10 +8,15 @@ part 'banner_ads_model.g.dart';
 final class BannerAdsModel extends BannerAdsEntity {
   BannerAdsModel({
     required super.moviesId,
+    required super.moviesIdIOS,
     required super.tvShowsId,
+    required super.tvShowsIdIOS,
     required super.celebsId,
+    required super.celebsIdIOS,
     required super.searchId,
+    required super.searchIdIOS,
     required super.tmdbId,
+    required super.tmdbIdIOS,
   });
 
   factory BannerAdsModel.fromJson(Map<String, dynamic> json) =>

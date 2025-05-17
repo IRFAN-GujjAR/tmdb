@@ -10,13 +10,13 @@ import 'package:tmdb/features/main/movies/domain/entities/movies_entity.dart';
 import 'package:tmdb/features/main/movies/presentation/blocs/movies_bloc.dart';
 import 'package:tmdb/features/main/movies/presentation/blocs/movies_events.dart';
 import 'package:tmdb/features/main/movies/presentation/blocs/movies_states.dart';
-import 'package:tmdb/main.dart';
 
 import '../../../../../core/ui/utils.dart';
 import '../../../../../core/ui/widgets/banner_ad_widget.dart';
 import '../../../../../core/ui/widgets/custom_error_widget.dart';
 import '../../../../../core/ui/widgets/loading_widget.dart';
 import '../../../../../core/ui/widgets/movies_category_widget.dart';
+import '../../../../../main.dart';
 import '../../../home/presentation/pages/home_page.dart';
 
 final class MoviesPage extends StatelessWidget {
@@ -40,17 +40,21 @@ final class MoviesPage extends StatelessWidget {
               category: MoviesCategories.Popular,
               moviesList: movies.popular,
             ),
-            if (!isIOS)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 6.0),
-                child: BannerAdWidget(
-                  showDivider: true,
-                  adUnitId: AdUtils.bannerAdId(
-                    context.read<AdsManagerProvider>().bannerAds!.moviesId,
-                  ),
-                  adSize: AdSize.banner,
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 6.0),
+              child: BannerAdWidget(
+                showDivider: true,
+                adUnitId: AdUtils.bannerAdId(
+                  isIOS
+                      ? context
+                          .read<AdsManagerProvider>()
+                          .bannerAds!
+                          .moviesIdIOS
+                      : context.read<AdsManagerProvider>().bannerAds!.moviesId,
                 ),
+                adSize: AdSize.banner,
               ),
+            ),
             MoviesCategoriesWidget(
               category: MoviesCategories.InTheatres,
               moviesList: movies.inTheatres,

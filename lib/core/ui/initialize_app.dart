@@ -40,7 +40,7 @@ AppDatabase get appDatabase => locator.get<AppDatabase>();
 Future<void> get initializeFlutterApp async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initializeFirebaseApp;
-  if (!isIOS) await MobileAds.instance.initialize();
+  await MobileAds.instance.initialize();
   locator.registerSingleton(AppDatabase());
   runApp(await _initializeServicesApp);
 }

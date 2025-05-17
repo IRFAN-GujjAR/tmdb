@@ -10,5 +10,6 @@ InterstitialAdFunctionCallModel _$InterstitialAdFunctionCallModelFromJson(
   Map<String, dynamic> json,
 ) => InterstitialAdFunctionCallModel(
   id: json['id'] as String,
+  idIOS: json['id_ios'] as String,
   callWaitCount: (json['call_wait_count'] as num).toInt(),
 );

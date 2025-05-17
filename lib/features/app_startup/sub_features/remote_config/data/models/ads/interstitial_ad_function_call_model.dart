@@ -8,6 +8,7 @@ final class InterstitialAdFunctionCallModel
     extends InterstitialAdFunctionCallEntity {
   const InterstitialAdFunctionCallModel({
     required super.id,
+    required super.idIOS,
     required super.callWaitCount,
   });
 

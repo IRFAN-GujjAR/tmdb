@@ -48,16 +48,17 @@ class TMDbbWidget extends StatelessWidget {
                           )
                           : Container(),
             ),
-            if (!isIOS)
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: BannerAdWidget(
-                  adUnitId: AdUtils.bannerAdId(
-                    context.read<AdsManagerProvider>().bannerAds!.tmdbId,
-                  ),
-                  adSize: AdSize.largeBanner,
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: BannerAdWidget(
+                adUnitId: AdUtils.bannerAdId(
+                  isIOS
+                      ? context.read<AdsManagerProvider>().bannerAds!.tmdbIdIOS
+                      : context.read<AdsManagerProvider>().bannerAds!.tmdbId,
                 ),
+                adSize: AdSize.largeBanner,
               ),
+            ),
           ],
         ),
       ),
